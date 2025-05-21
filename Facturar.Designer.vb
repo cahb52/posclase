@@ -22,9 +22,9 @@ Partial Class Facturar
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.TxtNombres = New System.Windows.Forms.TextBox()
@@ -51,6 +51,9 @@ Partial Class Facturar
         Me.TxtDescuento = New System.Windows.Forms.TextBox()
         Me.BtnGuardar = New System.Windows.Forms.Button()
         Me.ChkPedido = New System.Windows.Forms.CheckBox()
+        Me.DtFechaEntrega = New System.Windows.Forms.DateTimePicker()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.DetalleVenta, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -179,18 +182,18 @@ Partial Class Facturar
         '
         'precio_unitario
         '
-        DataGridViewCellStyle7.Format = "C2"
-        DataGridViewCellStyle7.NullValue = Nothing
-        Me.precio_unitario.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle4.Format = "C2"
+        DataGridViewCellStyle4.NullValue = Nothing
+        Me.precio_unitario.DefaultCellStyle = DataGridViewCellStyle4
         Me.precio_unitario.HeaderText = "Precio Unitario"
         Me.precio_unitario.Name = "precio_unitario"
         Me.precio_unitario.ReadOnly = True
         '
         'precio_costo
         '
-        DataGridViewCellStyle8.Format = "C2"
-        DataGridViewCellStyle8.NullValue = Nothing
-        Me.precio_costo.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle5.Format = "C2"
+        DataGridViewCellStyle5.NullValue = Nothing
+        Me.precio_costo.DefaultCellStyle = DataGridViewCellStyle5
         Me.precio_costo.HeaderText = "Precio Costo"
         Me.precio_costo.Name = "precio_costo"
         Me.precio_costo.ReadOnly = True
@@ -198,9 +201,9 @@ Partial Class Facturar
         '
         'subtotal
         '
-        DataGridViewCellStyle9.Format = "C2"
-        DataGridViewCellStyle9.NullValue = Nothing
-        Me.subtotal.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle6.Format = "C2"
+        DataGridViewCellStyle6.NullValue = Nothing
+        Me.subtotal.DefaultCellStyle = DataGridViewCellStyle6
         Me.subtotal.HeaderText = "Subtotal"
         Me.subtotal.Name = "subtotal"
         Me.subtotal.ReadOnly = True
@@ -269,9 +272,9 @@ Partial Class Facturar
         '
         'BtnGuardar
         '
-        Me.BtnGuardar.Location = New System.Drawing.Point(102, 578)
+        Me.BtnGuardar.Location = New System.Drawing.Point(687, 555)
         Me.BtnGuardar.Name = "BtnGuardar"
-        Me.BtnGuardar.Size = New System.Drawing.Size(243, 23)
+        Me.BtnGuardar.Size = New System.Drawing.Size(243, 56)
         Me.BtnGuardar.TabIndex = 20
         Me.BtnGuardar.Text = "Generar"
         Me.BtnGuardar.UseVisualStyleBackColor = True
@@ -286,11 +289,40 @@ Partial Class Facturar
         Me.ChkPedido.Text = "Pedido"
         Me.ChkPedido.UseVisualStyleBackColor = True
         '
+        'DtFechaEntrega
+        '
+        Me.DtFechaEntrega.Enabled = False
+        Me.DtFechaEntrega.Location = New System.Drawing.Point(222, 581)
+        Me.DtFechaEntrega.Name = "DtFechaEntrega"
+        Me.DtFechaEntrega.Size = New System.Drawing.Size(200, 20)
+        Me.DtFechaEntrega.TabIndex = 22
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(105, 584)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(95, 13)
+        Me.Label9.TabIndex = 23
+        Me.Label9.Text = "Fecha de Entrega:"
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(524, 573)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 24
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'Facturar
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(942, 613)
+        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.Label9)
+        Me.Controls.Add(Me.DtFechaEntrega)
         Me.Controls.Add(Me.ChkPedido)
         Me.Controls.Add(Me.BtnGuardar)
         Me.Controls.Add(Me.TxtDescuento)
@@ -345,4 +377,7 @@ Partial Class Facturar
     Friend WithEvents precio_unitario As DataGridViewTextBoxColumn
     Friend WithEvents precio_costo As DataGridViewTextBoxColumn
     Friend WithEvents subtotal As DataGridViewTextBoxColumn
+    Friend WithEvents DtFechaEntrega As DateTimePicker
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Button1 As Button
 End Class

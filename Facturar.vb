@@ -4,6 +4,7 @@ Imports posclase.DBTableAdapters
 Public Class Facturar
     Public nitodpi As String = ""
     Private TotalFacturaQ As Decimal
+    Private FacturaPedido As Int32 = 0
     Private Sub LimpiarCamposCliente()
         ' Limpia los campos si no hay coincidencia
         nitodpi = ""
@@ -85,7 +86,12 @@ Public Class Facturar
     End Sub
 
     Private Sub BtnGuardar_Click(sender As Object, e As EventArgs) Handles BtnGuardar.Click
-        GuardarFacturaDesdeXSD(DetalleVenta, TotalFacturaQ, nitodpi, "1311283")
+        If FacturaPedido = 1 Then
+            GuardarPedidoDesdeXSD(DetalleVenta, TotalFacturaQ, nitodpi, "1311283", DtFechaEntrega.Value.Date)
+        Else
+            GuardarFacturaDesdeXSD(DetalleVenta, TotalFacturaQ, nitodpi, "1311283")
+        End If
+
     End Sub
 
 
@@ -138,6 +144,95 @@ Public Class Facturar
         End Using
 
         MessageBox.Show("Factura guardada correctamente.")
+        LimpiarTodo()
     End Sub
 
+
+    'aqui voy a generar el pedido
+
+    Public Sub GuardarPedidoDesdeXSD(dgvDetalle As DataGridView, total As Decimal, cliente As String, vendedor As String, fechaentrega As Date)
+        Using cn As New SqlConnection(My.Settings.negocioConnectionString) ' Reemplaza con tu cadena o Settings
+            cn.Open()
+
+            Using cmd As New SqlCommand("sp_GuardarPedido", cn)
+                cmd.CommandType = CommandType.StoredProcedure
+
+                ' Parámetros de la factura
+                cmd.Parameters.AddWithValue("@fecha", DateTime.Now)
+                cmd.Parameters.AddWithValue("@total", total)
+                cmd.Parameters.AddWithValue("@cliente", cliente)
+                cmd.Parameters.AddWithValue("@vendedor", vendedor)
+                cmd.Parameters.AddWithValue("@fechaentrega", fechaentrega)
+
+                ' Crear tabla para los detalles
+                Dim detalleTable As New DataTable()
+                detalleTable.Columns.Add("codigo", GetType(String))
+                detalleTable.Columns.Add("nombre", GetType(String))
+                detalleTable.Columns.Add("cantidad", GetType(Decimal))
+                detalleTable.Columns.Add("precio_unitario", GetType(Decimal))
+                detalleTable.Columns.Add("precio_costo", GetType(Decimal))
+                detalleTable.Columns.Add("subtotal", GetType(Decimal))
+
+                ' Cargar datos desde DataGridView
+                For Each row As DataGridViewRow In dgvDetalle.Rows
+                    If Not row.IsNewRow Then
+                        detalleTable.Rows.Add(
+                        row.Cells("codigo").Value,
+                        row.Cells("nombre").Value,
+                        row.Cells("cantidad").Value,
+                        row.Cells("precio_unitario").Value,
+                        row.Cells("precio_costo").Value,
+                        row.Cells("subtotal").Value
+                    )
+                    End If
+                Next
+
+                ' Parámetro tipo tabla
+                Dim detalleParam As New SqlParameter("@detalle", SqlDbType.Structured)
+                detalleParam.TypeName = "DetalleVentaTipo"
+                detalleParam.Value = detalleTable
+                cmd.Parameters.Add(detalleParam)
+
+                ' Ejecutar
+                cmd.ExecuteNonQuery()
+            End Using
+        End Using
+
+        MessageBox.Show("Pedido guardado correctamente.")
+        LimpiarTodo()
+    End Sub
+
+    Private Sub ChkPedido_CheckedChanged(sender As Object, e As EventArgs) Handles ChkPedido.CheckedChanged
+        If ChkPedido.Checked Then
+            DtFechaEntrega.Enabled = True
+            FacturaPedido = 1
+        Else
+            DtFechaEntrega.Enabled = False
+            FacturaPedido = 0
+        End If
+    End Sub
+    Private Sub LimpiarTodo()
+        TxtApellidos.Text = String.Empty
+        TxtCantidad.Text = 1
+        TxtDescuento.Text = 0
+        ChkPedido.Checked = False
+        TxtCodigo.Text = String.Empty
+        TxtDireccion.Text = String.Empty
+        TxtNombres.Text = String.Empty
+        DetalleVenta.Rows.Clear()
+        TotalFacturaQ = 0
+        TxtTotalFactura.Text = 0
+        TextBox1.Text = String.Empty
+        DtFechaEntrega.Value = DateTime.Now
+        ChkPorcentaje.Checked = False
+
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim factura As New Factura
+        factura.factura = 1
+        factura.nitodpi = nitodpi
+        factura.Show()
+
+    End Sub
 End Class

@@ -32,6 +32,8 @@ Partial Class Clientes
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Clientes))
         Me.ClientesBindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
         Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton()
+        Me.ClientesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.DB = New posclase.DB()
         Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel()
         Me.BindingNavigatorDeleteItem = New System.Windows.Forms.ToolStripButton()
         Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton()
@@ -53,15 +55,13 @@ Partial Class Clientes
         Me.Label1 = New System.Windows.Forms.Label()
         Me.BtnReporteClientes = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.FKFacturasClientesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.FacturasBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.DB = New posclase.DB()
-        Me.ClientesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.ClientesTableAdapter = New posclase.DBTableAdapters.ClientesTableAdapter()
         Me.TableAdapterManager = New posclase.DBTableAdapters.TableAdapterManager()
         Me.FacturasTableAdapter = New posclase.DBTableAdapters.FacturasTableAdapter()
-        Me.FKFacturasClientesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.IdfacturaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FechaDataGridViewImageColumn = New System.Windows.Forms.DataGridViewImageColumn()
+        Me.FechaDataGridViewImageColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TotalDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.VendedorDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -73,11 +73,11 @@ Partial Class Clientes
         EmailLabel = New System.Windows.Forms.Label()
         CType(Me.ClientesBindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ClientesBindingNavigator.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.FacturasBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DB, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ClientesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DB, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.FKFacturasClientesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.FacturasBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'NitLabel
@@ -161,6 +161,16 @@ Partial Class Clientes
         Me.BindingNavigatorAddNewItem.Size = New System.Drawing.Size(23, 22)
         Me.BindingNavigatorAddNewItem.Text = "Agregar nuevo"
         '
+        'ClientesBindingSource
+        '
+        Me.ClientesBindingSource.DataMember = "Clientes"
+        Me.ClientesBindingSource.DataSource = Me.DB
+        '
+        'DB
+        '
+        Me.DB.DataSetName = "DB"
+        Me.DB.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
         'BindingNavigatorCountItem
         '
         Me.BindingNavigatorCountItem.Name = "BindingNavigatorCountItem"
@@ -204,6 +214,7 @@ Partial Class Clientes
         '
         Me.BindingNavigatorPositionItem.AccessibleName = "Posición"
         Me.BindingNavigatorPositionItem.AutoSize = False
+        Me.BindingNavigatorPositionItem.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.BindingNavigatorPositionItem.Name = "BindingNavigatorPositionItem"
         Me.BindingNavigatorPositionItem.Size = New System.Drawing.Size(50, 23)
         Me.BindingNavigatorPositionItem.Text = "0"
@@ -335,20 +346,15 @@ Partial Class Clientes
         Me.DataGridView1.Size = New System.Drawing.Size(862, 318)
         Me.DataGridView1.TabIndex = 16
         '
+        'FKFacturasClientesBindingSource
+        '
+        Me.FKFacturasClientesBindingSource.DataMember = "FK_Facturas_Clientes"
+        Me.FKFacturasClientesBindingSource.DataSource = Me.ClientesBindingSource
+        '
         'FacturasBindingSource
         '
         Me.FacturasBindingSource.DataMember = "Facturas"
         Me.FacturasBindingSource.DataSource = Me.DB
-        '
-        'DB
-        '
-        Me.DB.DataSetName = "DB"
-        Me.DB.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'ClientesBindingSource
-        '
-        Me.ClientesBindingSource.DataMember = "Clientes"
-        Me.ClientesBindingSource.DataSource = Me.DB
         '
         'ClientesTableAdapter
         '
@@ -359,9 +365,11 @@ Partial Class Clientes
         Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
         Me.TableAdapterManager.CategoriasTableAdapter = Nothing
         Me.TableAdapterManager.ClientesTableAdapter = Me.ClientesTableAdapter
+        Me.TableAdapterManager.Detalle_PedidoTableAdapter = Nothing
         Me.TableAdapterManager.Detalle_VentasTableAdapter = Nothing
         Me.TableAdapterManager.EmpresaTableAdapter = Nothing
         Me.TableAdapterManager.FacturasTableAdapter = Nothing
+        Me.TableAdapterManager.PedidosTableAdapter = Nothing
         Me.TableAdapterManager.ProductosTableAdapter = Nothing
         Me.TableAdapterManager.ProveedoresTableAdapter = Nothing
         Me.TableAdapterManager.UpdateOrder = posclase.DBTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
@@ -370,11 +378,6 @@ Partial Class Clientes
         'FacturasTableAdapter
         '
         Me.FacturasTableAdapter.ClearBeforeFill = True
-        '
-        'FKFacturasClientesBindingSource
-        '
-        Me.FKFacturasClientesBindingSource.DataMember = "FK_Facturas_Clientes"
-        Me.FKFacturasClientesBindingSource.DataSource = Me.ClientesBindingSource
         '
         'IdfacturaDataGridViewTextBoxColumn
         '
@@ -389,6 +392,8 @@ Partial Class Clientes
         Me.FechaDataGridViewImageColumn.HeaderText = "Fecha"
         Me.FechaDataGridViewImageColumn.Name = "FechaDataGridViewImageColumn"
         Me.FechaDataGridViewImageColumn.ReadOnly = True
+        Me.FechaDataGridViewImageColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.FechaDataGridViewImageColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'TotalDataGridViewTextBoxColumn
         '
@@ -438,11 +443,11 @@ Partial Class Clientes
         CType(Me.ClientesBindingNavigator, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ClientesBindingNavigator.ResumeLayout(False)
         Me.ClientesBindingNavigator.PerformLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.FacturasBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DB, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ClientesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DB, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.FKFacturasClientesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.FacturasBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -477,10 +482,10 @@ Partial Class Clientes
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents FacturasBindingSource As BindingSource
     Friend WithEvents FacturasTableAdapter As DBTableAdapters.FacturasTableAdapter
+    Friend WithEvents FKFacturasClientesBindingSource As BindingSource
     Friend WithEvents IdfacturaDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents FechaDataGridViewImageColumn As DataGridViewImageColumn
+    Friend WithEvents FechaDataGridViewImageColumn As DataGridViewTextBoxColumn
     Friend WithEvents TotalDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents ClienteDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents VendedorDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents FKFacturasClientesBindingSource As BindingSource
 End Class

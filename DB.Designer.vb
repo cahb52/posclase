@@ -3824,6 +3824,8 @@ Partial Public Class DB
         
         Private columnfecha As Global.System.Data.DataColumn
         
+        Private columnfecha_entrega As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Public Sub New()
@@ -3900,6 +3902,14 @@ Partial Public Class DB
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property fecha_entregaColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnfecha_entrega
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -3936,9 +3946,9 @@ Partial Public Class DB
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Overloads Function AddPedidosRow(ByVal total As Decimal, ByVal parentClientesRowByFK_Pedidos_Clientes As ClientesRow, ByVal parentVendedoresRowByFK_Pedidos_Vendedores As VendedoresRow, ByVal fecha As Date) As PedidosRow
+        Public Overloads Function AddPedidosRow(ByVal total As Decimal, ByVal parentClientesRowByFK_Pedidos_Clientes As ClientesRow, ByVal parentVendedoresRowByFK_Pedidos_Vendedores As VendedoresRow, ByVal fecha As Date, ByVal fecha_entrega As Date) As PedidosRow
             Dim rowPedidosRow As PedidosRow = CType(Me.NewRow,PedidosRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing, total, Nothing, Nothing, fecha}
+            Dim columnValuesArray() As Object = New Object() {Nothing, total, Nothing, Nothing, fecha, fecha_entrega}
             If (Not (parentClientesRowByFK_Pedidos_Clientes) Is Nothing) Then
                 columnValuesArray(2) = parentClientesRowByFK_Pedidos_Clientes(0)
             End If
@@ -3978,6 +3988,7 @@ Partial Public Class DB
             Me.columncliente = MyBase.Columns("cliente")
             Me.columnvendedor = MyBase.Columns("vendedor")
             Me.columnfecha = MyBase.Columns("fecha")
+            Me.columnfecha_entrega = MyBase.Columns("fecha_entrega")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -3993,6 +4004,8 @@ Partial Public Class DB
             MyBase.Columns.Add(Me.columnvendedor)
             Me.columnfecha = New Global.System.Data.DataColumn("fecha", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnfecha)
+            Me.columnfecha_entrega = New Global.System.Data.DataColumn("fecha_entrega", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnfecha_entrega)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnidpedido}, true))
             Me.columnidpedido.AutoIncrement = true
             Me.columnidpedido.AutoIncrementSeed = -1
@@ -4005,6 +4018,7 @@ Partial Public Class DB
             Me.columncliente.MaxLength = 50
             Me.columnvendedor.MaxLength = 50
             Me.columnfecha.AllowDBNull = false
+            Me.columnfecha_entrega.AllowDBNull = false
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -5423,6 +5437,17 @@ Partial Public Class DB
             End Get
             Set
                 Me(Me.tablePedidos.fechaColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property fecha_entrega() As Date
+            Get
+                Return CType(Me(Me.tablePedidos.fecha_entregaColumn),Date)
+            End Get
+            Set
+                Me(Me.tablePedidos.fecha_entregaColumn) = value
             End Set
         End Property
         
@@ -6966,12 +6991,17 @@ Namespace DBTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Sub InitCommandCollection()
-            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
+            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(1) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT nit, nombre, direccion, telefono, facebook, instagram, tiktok, email, tele"& _ 
                 "gram, whatsapp, logo FROM dbo.Empresa"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(1).Connection = Me.Connection
+            Me._commandCollection(1).CommandText = "SELECT top 1 nit, nombre, direccion, telefono, facebook, instagram, tiktok, email"& _ 
+                ", telegram, whatsapp, logo FROM dbo.Empresa"
+            Me._commandCollection(1).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -6993,6 +7023,30 @@ Namespace DBTableAdapters
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
         Public Overloads Overridable Function GetData() As DB.EmpresaDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            Dim dataTable As DB.EmpresaDataTable = New DB.EmpresaDataTable()
+            Me.Adapter.Fill(dataTable)
+            Return dataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillByPrimera(ByVal dataTable As DB.EmpresaDataTable) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(1)
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetDataByPrimera() As DB.EmpresaDataTable
+            Me.Adapter.SelectCommand = Me.CommandCollection(1)
             Dim dataTable As DB.EmpresaDataTable = New DB.EmpresaDataTable()
             Me.Adapter.Fill(dataTable)
             Return dataTable
@@ -7520,7 +7574,7 @@ Namespace DBTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Sub InitCommandCollection()
-            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(2) {}
+            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(3) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT idfactura, fecha, total, cliente, vendedor FROM dbo.Facturas"
@@ -7535,15 +7589,26 @@ Namespace DBTableAdapters
             Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@cliente", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "cliente", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(2) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(2).Connection = Me.Connection
-            Me._commandCollection(2).CommandText = "SELECT        Facturas.idfactura, Facturas.fecha, Facturas.total, Facturas.client"& _ 
+            Me._commandCollection(2).CommandText = "SELECT        Facturas.idfactura, Facturas.fecha, Facturas.total, Clientes.nit, {"& _ 
+                " fn CONCAT({ fn CONCAT(Clientes.nombres, ',') }, Clientes.apellidos) } AS client"& _ 
+                "e, { fn CONCAT({ fn CONCAT(Vendedores.nombres, ', ') }, Vendedores.apellidos) "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)& _ 
+                "                         } AS vendedor"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            Facturas INNER JOIN"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"   "& _ 
+                "                      Clientes ON Facturas.cliente = Clientes.nit INNER JOIN"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"  "& _ 
+                "                       Vendedores ON Facturas.vendedor = Vendedores.dpi"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE  "& _ 
+                "      (Facturas.idfactura = @x)"
+            Me._commandCollection(2).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@x", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "idfactura", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(3).Connection = Me.Connection
+            Me._commandCollection(3).CommandText = "SELECT        Facturas.idfactura, Facturas.fecha, Facturas.total, Facturas.client"& _ 
                 "e, Vendedores.nombres, Vendedores.apellidos"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            Facturas INNER JOIN"& _ 
                 ""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         Vendedores ON Facturas.vendedor = Vendedores.dpi"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHE"& _ 
                 "RE        (Facturas.vendedor = @dpi) AND (Facturas.fecha BETWEEN @fechaInicio AN"& _ 
                 "D @fechaFin)"
-            Me._commandCollection(2).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@dpi", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "vendedor", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@fechaInicio", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "fecha", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@fechaFin", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "fecha", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@dpi", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "vendedor", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@fechaInicio", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "fecha", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@fechaFin", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "fecha", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -7608,8 +7673,34 @@ Namespace DBTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
-        Public Overloads Overridable Function FillByFacturasxVendedor(ByVal dataTable As DB.FacturasDataTable, ByVal dpi As String, ByVal fechaInicio As Date, ByVal fechaFin As Date) As Integer
+        Public Overloads Overridable Function FillByFactura(ByVal dataTable As DB.FacturasDataTable, ByVal x As Integer) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(2)
+            Me.Adapter.SelectCommand.Parameters(0).Value = CType(x,Integer)
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetDataByFactura(ByVal x As Integer) As DB.FacturasDataTable
+            Me.Adapter.SelectCommand = Me.CommandCollection(2)
+            Me.Adapter.SelectCommand.Parameters(0).Value = CType(x,Integer)
+            Dim dataTable As DB.FacturasDataTable = New DB.FacturasDataTable()
+            Me.Adapter.Fill(dataTable)
+            Return dataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillByFacturasxVendedor(ByVal dataTable As DB.FacturasDataTable, ByVal dpi As String, ByVal fechaInicio As Date, ByVal fechaFin As Date) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(3)
             If (dpi Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
@@ -7629,7 +7720,7 @@ Namespace DBTableAdapters
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
         Public Overloads Overridable Function GetDataByFacturasxVendedor(ByVal dpi As String, ByVal fechaInicio As Date, ByVal fechaFin As Date) As DB.FacturasDataTable
-            Me.Adapter.SelectCommand = Me.CommandCollection(2)
+            Me.Adapter.SelectCommand = Me.CommandCollection(3)
             If (dpi Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
@@ -10002,49 +10093,53 @@ Namespace DBTableAdapters
             tableMapping.ColumnMappings.Add("cliente", "cliente")
             tableMapping.ColumnMappings.Add("vendedor", "vendedor")
             tableMapping.ColumnMappings.Add("fecha", "fecha")
+            tableMapping.ColumnMappings.Add("fecha_entrega", "fecha_entrega")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
-            Me._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Pedidos] WHERE (([idpedido] = @Original_idpedido) AND ([total]"& _ 
-                " = @Original_total) AND ([cliente] = @Original_cliente) AND ((@IsNull_vendedor ="& _ 
-                " 1 AND [vendedor] IS NULL) OR ([vendedor] = @Original_vendedor)) AND ([fecha] = "& _ 
-                "@Original_fecha))"
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM [Pedidos] WHERE (([idpedido] = @Original_idpedido) AND ([total] = @Or"& _ 
+                "iginal_total) AND ([cliente] = @Original_cliente) AND ([vendedor] = @Original_ve"& _ 
+                "ndedor) AND ([fecha] = @Original_fecha) AND ([fecha_entrega] = @Original_fecha_e"& _ 
+                "ntrega))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_idpedido", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "idpedido", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_total", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 20, 2, "total", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_cliente", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "cliente", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_vendedor", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "vendedor", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_vendedor", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "vendedor", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_fecha", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "fecha", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_fecha_entrega", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "fecha_entrega", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Pedidos] ([total], [cliente], [vendedor], [fecha]) VALUES (@to"& _ 
-                "tal, @cliente, @vendedor, @fecha);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT idpedido, total, cliente, vendedor, f"& _ 
-                "echa FROM Pedidos WHERE (idpedido = SCOPE_IDENTITY())"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [Pedidos] ([total], [cliente], [vendedor], [fecha], [fecha_entrega]) "& _ 
+                "VALUES (@total, @cliente, @vendedor, @fecha, @fecha_entrega);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT idpedido, "& _ 
+                "total, cliente, vendedor, fecha, fecha_entrega FROM Pedidos WHERE (idpedido = SC"& _ 
+                "OPE_IDENTITY())"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@total", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 20, 2, "total", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@cliente", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "cliente", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@vendedor", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "vendedor", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@fecha", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "fecha", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@fecha_entrega", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "fecha_entrega", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
-            Me._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[Pedidos] SET [total] = @total, [cliente] = @cliente, [vendedor] = @"& _ 
-                "vendedor, [fecha] = @fecha WHERE (([idpedido] = @Original_idpedido) AND ([total]"& _ 
-                " = @Original_total) AND ([cliente] = @Original_cliente) AND ((@IsNull_vendedor ="& _ 
-                " 1 AND [vendedor] IS NULL) OR ([vendedor] = @Original_vendedor)) AND ([fecha] = "& _ 
-                "@Original_fecha));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT idpedido, total, cliente, vendedor, fecha FROM Pedido"& _ 
-                "s WHERE (idpedido = @idpedido)"
+            Me._adapter.UpdateCommand.CommandText = "UPDATE [Pedidos] SET [total] = @total, [cliente] = @cliente, [vendedor] = @vended"& _ 
+                "or, [fecha] = @fecha, [fecha_entrega] = @fecha_entrega WHERE (([idpedido] = @Ori"& _ 
+                "ginal_idpedido) AND ([total] = @Original_total) AND ([cliente] = @Original_clien"& _ 
+                "te) AND ([vendedor] = @Original_vendedor) AND ([fecha] = @Original_fecha) AND (["& _ 
+                "fecha_entrega] = @Original_fecha_entrega));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT idpedido, total, cliente, ve"& _ 
+                "ndedor, fecha, fecha_entrega FROM Pedidos WHERE (idpedido = @idpedido)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@total", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 20, 2, "total", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@cliente", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "cliente", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@vendedor", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "vendedor", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@fecha", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "fecha", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@fecha_entrega", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "fecha_entrega", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_idpedido", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "idpedido", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_total", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 20, 2, "total", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_cliente", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "cliente", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_vendedor", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "vendedor", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_vendedor", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "vendedor", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_fecha", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "fecha", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_fecha_entrega", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "fecha_entrega", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@idpedido", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "idpedido", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
         
@@ -10061,7 +10156,7 @@ Namespace DBTableAdapters
             Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT idpedido, total, cliente, vendedor, fecha FROM dbo.Pedidos"
+            Me._commandCollection(0).CommandText = "SELECT idpedido, total, cliente, vendedor, fecha, fecha_entrega FROM Pedidos"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -10121,7 +10216,7 @@ Namespace DBTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_idpedido As Integer, ByVal Original_total As Decimal, ByVal Original_cliente As String, ByVal Original_vendedor As String, ByVal Original_fecha As Date) As Integer
+        Public Overloads Overridable Function Delete(ByVal Original_idpedido As Integer, ByVal Original_total As Decimal, ByVal Original_cliente As String, ByVal Original_vendedor As String, ByVal Original_fecha As Date, ByVal Original_fecha_entrega As Date) As Integer
             Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_idpedido,Integer)
             Me.Adapter.DeleteCommand.Parameters(1).Value = CType(Original_total,Decimal)
             If (Original_cliente Is Nothing) Then
@@ -10130,13 +10225,12 @@ Namespace DBTableAdapters
                 Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_cliente,String)
             End If
             If (Original_vendedor Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(4).Value = Global.System.DBNull.Value
+                Throw New Global.System.ArgumentNullException("Original_vendedor")
             Else
-                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(Original_vendedor,String)
+                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(Original_vendedor,String)
             End If
-            Me.Adapter.DeleteCommand.Parameters(5).Value = CType(Original_fecha,Date)
+            Me.Adapter.DeleteCommand.Parameters(4).Value = CType(Original_fecha,Date)
+            Me.Adapter.DeleteCommand.Parameters(5).Value = CType(Original_fecha_entrega,Date)
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -10156,7 +10250,7 @@ Namespace DBTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal total As Decimal, ByVal cliente As String, ByVal vendedor As String, ByVal fecha As Date) As Integer
+        Public Overloads Overridable Function Insert(ByVal total As Decimal, ByVal cliente As String, ByVal vendedor As String, ByVal fecha As Date, ByVal fecha_entrega As Date) As Integer
             Me.Adapter.InsertCommand.Parameters(0).Value = CType(total,Decimal)
             If (cliente Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("cliente")
@@ -10164,11 +10258,12 @@ Namespace DBTableAdapters
                 Me.Adapter.InsertCommand.Parameters(1).Value = CType(cliente,String)
             End If
             If (vendedor Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
+                Throw New Global.System.ArgumentNullException("vendedor")
             Else
                 Me.Adapter.InsertCommand.Parameters(2).Value = CType(vendedor,String)
             End If
             Me.Adapter.InsertCommand.Parameters(3).Value = CType(fecha,Date)
+            Me.Adapter.InsertCommand.Parameters(4).Value = CType(fecha_entrega,Date)
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -10188,7 +10283,7 @@ Namespace DBTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update(ByVal total As Decimal, ByVal cliente As String, ByVal vendedor As String, ByVal fecha As Date, ByVal Original_idpedido As Integer, ByVal Original_total As Decimal, ByVal Original_cliente As String, ByVal Original_vendedor As String, ByVal Original_fecha As Date, ByVal idpedido As Integer) As Integer
+        Public Overloads Overridable Function Update(ByVal total As Decimal, ByVal cliente As String, ByVal vendedor As String, ByVal fecha As Date, ByVal fecha_entrega As Date, ByVal Original_idpedido As Integer, ByVal Original_total As Decimal, ByVal Original_cliente As String, ByVal Original_vendedor As String, ByVal Original_fecha As Date, ByVal Original_fecha_entrega As Date, ByVal idpedido As Integer) As Integer
             Me.Adapter.UpdateCommand.Parameters(0).Value = CType(total,Decimal)
             If (cliente Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("cliente")
@@ -10196,27 +10291,27 @@ Namespace DBTableAdapters
                 Me.Adapter.UpdateCommand.Parameters(1).Value = CType(cliente,String)
             End If
             If (vendedor Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(2).Value = Global.System.DBNull.Value
+                Throw New Global.System.ArgumentNullException("vendedor")
             Else
                 Me.Adapter.UpdateCommand.Parameters(2).Value = CType(vendedor,String)
             End If
             Me.Adapter.UpdateCommand.Parameters(3).Value = CType(fecha,Date)
-            Me.Adapter.UpdateCommand.Parameters(4).Value = CType(Original_idpedido,Integer)
-            Me.Adapter.UpdateCommand.Parameters(5).Value = CType(Original_total,Decimal)
+            Me.Adapter.UpdateCommand.Parameters(4).Value = CType(fecha_entrega,Date)
+            Me.Adapter.UpdateCommand.Parameters(5).Value = CType(Original_idpedido,Integer)
+            Me.Adapter.UpdateCommand.Parameters(6).Value = CType(Original_total,Decimal)
             If (Original_cliente Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_cliente")
             Else
-                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(Original_cliente,String)
+                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(Original_cliente,String)
             End If
             If (Original_vendedor Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(8).Value = Global.System.DBNull.Value
+                Throw New Global.System.ArgumentNullException("Original_vendedor")
             Else
-                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(0,Object)
                 Me.Adapter.UpdateCommand.Parameters(8).Value = CType(Original_vendedor,String)
             End If
             Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Original_fecha,Date)
-            Me.Adapter.UpdateCommand.Parameters(10).Value = CType(idpedido,Integer)
+            Me.Adapter.UpdateCommand.Parameters(10).Value = CType(Original_fecha_entrega,Date)
+            Me.Adapter.UpdateCommand.Parameters(11).Value = CType(idpedido,Integer)
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -10236,8 +10331,8 @@ Namespace DBTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update(ByVal total As Decimal, ByVal cliente As String, ByVal vendedor As String, ByVal fecha As Date, ByVal Original_idpedido As Integer, ByVal Original_total As Decimal, ByVal Original_cliente As String, ByVal Original_vendedor As String, ByVal Original_fecha As Date) As Integer
-            Return Me.Update(total, cliente, vendedor, fecha, Original_idpedido, Original_total, Original_cliente, Original_vendedor, Original_fecha, Original_idpedido)
+        Public Overloads Overridable Function Update(ByVal total As Decimal, ByVal cliente As String, ByVal vendedor As String, ByVal fecha As Date, ByVal fecha_entrega As Date, ByVal Original_idpedido As Integer, ByVal Original_total As Decimal, ByVal Original_cliente As String, ByVal Original_vendedor As String, ByVal Original_fecha As Date, ByVal Original_fecha_entrega As Date) As Integer
+            Return Me.Update(total, cliente, vendedor, fecha, fecha_entrega, Original_idpedido, Original_total, Original_cliente, Original_vendedor, Original_fecha, Original_fecha_entrega, Original_idpedido)
         End Function
     End Class
     
@@ -10269,7 +10364,7 @@ Namespace DBTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Sub InitCommandCollection()
-            Me._commandCollection = New Global.System.Data.IDbCommand(0) {}
+            Me._commandCollection = New Global.System.Data.IDbCommand(1) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             CType(Me._commandCollection(0),Global.System.Data.SqlClient.SqlCommand).Connection = New Global.System.Data.SqlClient.SqlConnection(Global.posclase.My.MySettings.Default.negocioConnectionString)
             CType(Me._commandCollection(0),Global.System.Data.SqlClient.SqlCommand).CommandText = "dbo.sp_GuardarFactura"
@@ -10280,6 +10375,17 @@ Namespace DBTableAdapters
             CType(Me._commandCollection(0),Global.System.Data.SqlClient.SqlCommand).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@cliente", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             CType(Me._commandCollection(0),Global.System.Data.SqlClient.SqlCommand).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@vendedor", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             CType(Me._commandCollection(0),Global.System.Data.SqlClient.SqlCommand).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@detalle", Global.System.Data.SqlDbType.Structured, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
+            CType(Me._commandCollection(1),Global.System.Data.SqlClient.SqlCommand).Connection = New Global.System.Data.SqlClient.SqlConnection(Global.posclase.My.MySettings.Default.negocioConnectionString)
+            CType(Me._commandCollection(1),Global.System.Data.SqlClient.SqlCommand).CommandText = "dbo.sp_GuardarPedido"
+            CType(Me._commandCollection(1),Global.System.Data.SqlClient.SqlCommand).CommandType = Global.System.Data.CommandType.StoredProcedure
+            CType(Me._commandCollection(1),Global.System.Data.SqlClient.SqlCommand).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            CType(Me._commandCollection(1),Global.System.Data.SqlClient.SqlCommand).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@fecha", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 23, 3, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            CType(Me._commandCollection(1),Global.System.Data.SqlClient.SqlCommand).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@total", Global.System.Data.SqlDbType.[Decimal], 13, Global.System.Data.ParameterDirection.Input, 20, 2, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            CType(Me._commandCollection(1),Global.System.Data.SqlClient.SqlCommand).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@cliente", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            CType(Me._commandCollection(1),Global.System.Data.SqlClient.SqlCommand).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@vendedor", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            CType(Me._commandCollection(1),Global.System.Data.SqlClient.SqlCommand).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@fechaentrega", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 23, 3, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            CType(Me._commandCollection(1),Global.System.Data.SqlClient.SqlCommand).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@detalle", Global.System.Data.SqlDbType.Structured, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -10311,6 +10417,57 @@ Namespace DBTableAdapters
                 command.Parameters(5).Value = Global.System.DBNull.Value
             Else
                 command.Parameters(5).Value = CType(detalle,Object)
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                command.Connection.Open
+            End If
+            Dim returnValue As Integer
+            Try 
+                returnValue = command.ExecuteNonQuery
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    command.Connection.Close
+                End If
+            End Try
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function sp_GuardarPedido(ByVal fecha As Global.System.Nullable(Of Date), ByVal total As Global.System.Nullable(Of Decimal), ByVal cliente As String, ByVal vendedor As String, ByVal fechaentrega As Global.System.Nullable(Of Date), ByVal detalle As Object) As Integer
+            Dim command As Global.System.Data.SqlClient.SqlCommand = CType(Me.CommandCollection(1),Global.System.Data.SqlClient.SqlCommand)
+            If (fecha.HasValue = true) Then
+                command.Parameters(1).Value = CType(fecha.Value,Date)
+            Else
+                command.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (total.HasValue = true) Then
+                command.Parameters(2).Value = CType(total.Value,Decimal)
+            Else
+                command.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            If (cliente Is Nothing) Then
+                command.Parameters(3).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(3).Value = CType(cliente,String)
+            End If
+            If (vendedor Is Nothing) Then
+                command.Parameters(4).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(4).Value = CType(vendedor,String)
+            End If
+            If (fechaentrega.HasValue = true) Then
+                command.Parameters(5).Value = CType(fechaentrega.Value,Date)
+            Else
+                command.Parameters(5).Value = Global.System.DBNull.Value
+            End If
+            If (detalle Is Nothing) Then
+                command.Parameters(6).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(6).Value = CType(detalle,Object)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
             If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
