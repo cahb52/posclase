@@ -37,4 +37,14 @@
         acercade.Show()
 
     End Sub
+
+    Private Sub FacturarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FacturarToolStripMenuItem.Click
+        Dim facturas As New Facturar
+        Facturar.Show()
+
+    End Sub
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.WindowState = FormWindowState.Maximized
+    End Sub
 End Class

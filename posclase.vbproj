@@ -131,6 +131,12 @@
     <Compile Include="Empresa.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Facturar.Designer.vb">
+      <DependentUpon>Facturar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Facturar.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Facturas.Designer.vb">
       <DependentUpon>Facturas.vb</DependentUpon>
     </Compile>
@@ -190,6 +196,12 @@
     <Compile Include="RptVendedores.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="RptVentasxVendedor.Designer.vb">
+      <DependentUpon>RptVentasxVendedor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RptVentasxVendedor.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Vendedores.Designer.vb">
       <DependentUpon>Vendedores.vb</DependentUpon>
     </Compile>
@@ -210,6 +222,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Empresa.resx">
       <DependentUpon>Empresa.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Facturar.resx">
+      <DependentUpon>Facturar.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Facturas.resx">
       <DependentUpon>Facturas.vb</DependentUpon>
@@ -237,6 +252,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RptVendedores.resx">
       <DependentUpon>RptVendedores.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RptVentasxVendedor.rdlc" />
+    <EmbeddedResource Include="RptVentasxVendedor.resx">
+      <DependentUpon>RptVentasxVendedor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vendedores.rdlc" />
     <EmbeddedResource Include="Vendedores.resx">

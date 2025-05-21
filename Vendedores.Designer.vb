@@ -56,6 +56,12 @@ Partial Class Vendedores
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TxtBuscar = New System.Windows.Forms.TextBox()
+        Me.GrpReporteVentas = New System.Windows.Forms.GroupBox()
+        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
+        Me.Button2 = New System.Windows.Forms.Button()
         DpiLabel = New System.Windows.Forms.Label()
         NombresLabel = New System.Windows.Forms.Label()
         ApellidosLabel = New System.Windows.Forms.Label()
@@ -66,6 +72,7 @@ Partial Class Vendedores
         CType(Me.VendedoresBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.VendedoresBindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.VendedoresBindingNavigator.SuspendLayout()
+        Me.GrpReporteVentas.SuspendLayout()
         Me.SuspendLayout()
         '
         'DpiLabel
@@ -335,11 +342,67 @@ Partial Class Vendedores
         Me.TxtBuscar.Size = New System.Drawing.Size(259, 20)
         Me.TxtBuscar.TabIndex = 15
         '
+        'GrpReporteVentas
+        '
+        Me.GrpReporteVentas.Controls.Add(Me.Button2)
+        Me.GrpReporteVentas.Controls.Add(Me.Label3)
+        Me.GrpReporteVentas.Controls.Add(Me.DateTimePicker2)
+        Me.GrpReporteVentas.Controls.Add(Me.Label2)
+        Me.GrpReporteVentas.Controls.Add(Me.DateTimePicker1)
+        Me.GrpReporteVentas.Location = New System.Drawing.Point(13, 222)
+        Me.GrpReporteVentas.Name = "GrpReporteVentas"
+        Me.GrpReporteVentas.Size = New System.Drawing.Size(238, 186)
+        Me.GrpReporteVentas.TabIndex = 16
+        Me.GrpReporteVentas.TabStop = False
+        Me.GrpReporteVentas.Text = "Reporte de Ventas"
+        '
+        'DateTimePicker1
+        '
+        Me.DateTimePicker1.Location = New System.Drawing.Point(22, 42)
+        Me.DateTimePicker1.Name = "DateTimePicker1"
+        Me.DateTimePicker1.Size = New System.Drawing.Size(200, 20)
+        Me.DateTimePicker1.TabIndex = 0
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(22, 20)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(79, 13)
+        Me.Label2.TabIndex = 1
+        Me.Label2.Text = "Fecha de inicio"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(25, 70)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(69, 13)
+        Me.Label3.TabIndex = 3
+        Me.Label3.Text = "Fecha de Fin"
+        '
+        'DateTimePicker2
+        '
+        Me.DateTimePicker2.Location = New System.Drawing.Point(22, 95)
+        Me.DateTimePicker2.Name = "DateTimePicker2"
+        Me.DateTimePicker2.Size = New System.Drawing.Size(200, 20)
+        Me.DateTimePicker2.TabIndex = 2
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(22, 142)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(200, 23)
+        Me.Button2.TabIndex = 4
+        Me.Button2.Text = "Imprimir Reporte"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'Vendedores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 233)
+        Me.ClientSize = New System.Drawing.Size(800, 506)
+        Me.Controls.Add(Me.GrpReporteVentas)
         Me.Controls.Add(Me.TxtBuscar)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Button1)
@@ -363,6 +426,8 @@ Partial Class Vendedores
         CType(Me.VendedoresBindingNavigator, System.ComponentModel.ISupportInitialize).EndInit()
         Me.VendedoresBindingNavigator.ResumeLayout(False)
         Me.VendedoresBindingNavigator.PerformLayout()
+        Me.GrpReporteVentas.ResumeLayout(False)
+        Me.GrpReporteVentas.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -394,4 +459,10 @@ Partial Class Vendedores
     Friend WithEvents Button1 As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents TxtBuscar As TextBox
+    Friend WithEvents GrpReporteVentas As GroupBox
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Label3 As Label
+    Friend WithEvents DateTimePicker2 As DateTimePicker
+    Friend WithEvents Label2 As Label
+    Friend WithEvents DateTimePicker1 As DateTimePicker
 End Class

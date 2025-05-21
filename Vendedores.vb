@@ -36,4 +36,22 @@
             VendedoresBindingSource.Filter = filtro
         End If
     End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        If String.IsNullOrEmpty(DpiTextBox.Text) Then
+            MessageBox.Show("No hay dpi a comparar")
+        Else
+            Dim fechainicio As DateTime = DateTimePicker1.Value.Date
+            Dim fechafin As DateTime = DateTimePicker2.Value.Date.AddDays(1).AddSeconds(-1)
+            Debug.WriteLine(fechainicio.ToString("yyyy-MM-dd HH:mm:ss"))
+            Debug.WriteLine(fechafin.ToString("yyyy-MM-dd HH:mm:ss"))
+            ' Pasa fechainicio y fechafin correctamente al reporte o consulta
+            Dim ventasxvendedor As New RptVentasxVendedor
+            ventasxvendedor.dpi = DpiTextBox.Text
+            ventasxvendedor.fecha_inico = fechainicio
+            ventasxvendedor.fecha_fin = fechafin
+            ventasxvendedor.Show()
+        End If
+
+    End Sub
 End Class
