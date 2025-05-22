@@ -11,4 +11,9 @@
         Me.ProveedoresTableAdapter.Fill(Me.DB.Proveedores)
 
     End Sub
+
+    Private Sub BtnReporte_Click(sender As Object, e As EventArgs) Handles BtnReporte.Click
+        Dim rptproveedores As New RptProveedores
+        rptproveedores.Show()
+    End Sub
 End Class

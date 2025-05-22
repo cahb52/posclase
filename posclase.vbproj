@@ -196,6 +196,12 @@
     <Compile Include="RptClientes.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="RptProveedores.Designer.vb">
+      <DependentUpon>RptProveedores.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RptProveedores.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="RptVendedores.Designer.vb">
       <DependentUpon>RptVendedores.vb</DependentUpon>
     </Compile>
@@ -259,6 +265,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RptClientes.resx">
       <DependentUpon>RptClientes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RptProveedores.rdlc" />
+    <EmbeddedResource Include="RptProveedores.resx">
+      <DependentUpon>RptProveedores.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RptVendedores.resx">
       <DependentUpon>RptVendedores.vb</DependentUpon>

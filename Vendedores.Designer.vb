@@ -57,11 +57,12 @@ Partial Class Vendedores
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TxtBuscar = New System.Windows.Forms.TextBox()
         Me.GrpReporteVentas = New System.Windows.Forms.GroupBox()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
+        Me.BtnreportedePedidos = New System.Windows.Forms.Button()
         DpiLabel = New System.Windows.Forms.Label()
         NombresLabel = New System.Windows.Forms.Label()
         ApellidosLabel = New System.Windows.Forms.Label()
@@ -148,9 +149,11 @@ Partial Class Vendedores
         Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
         Me.TableAdapterManager.CategoriasTableAdapter = Nothing
         Me.TableAdapterManager.ClientesTableAdapter = Nothing
+        Me.TableAdapterManager.Detalle_PedidoTableAdapter = Nothing
         Me.TableAdapterManager.Detalle_VentasTableAdapter = Nothing
         Me.TableAdapterManager.EmpresaTableAdapter = Nothing
         Me.TableAdapterManager.FacturasTableAdapter = Nothing
+        Me.TableAdapterManager.PedidosTableAdapter = Nothing
         Me.TableAdapterManager.ProductosTableAdapter = Nothing
         Me.TableAdapterManager.ProveedoresTableAdapter = Nothing
         Me.TableAdapterManager.UpdateOrder = posclase.DBTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
@@ -344,6 +347,7 @@ Partial Class Vendedores
         '
         'GrpReporteVentas
         '
+        Me.GrpReporteVentas.Controls.Add(Me.BtnreportedePedidos)
         Me.GrpReporteVentas.Controls.Add(Me.Button2)
         Me.GrpReporteVentas.Controls.Add(Me.Label3)
         Me.GrpReporteVentas.Controls.Add(Me.DateTimePicker2)
@@ -351,26 +355,19 @@ Partial Class Vendedores
         Me.GrpReporteVentas.Controls.Add(Me.DateTimePicker1)
         Me.GrpReporteVentas.Location = New System.Drawing.Point(13, 222)
         Me.GrpReporteVentas.Name = "GrpReporteVentas"
-        Me.GrpReporteVentas.Size = New System.Drawing.Size(238, 186)
+        Me.GrpReporteVentas.Size = New System.Drawing.Size(238, 222)
         Me.GrpReporteVentas.TabIndex = 16
         Me.GrpReporteVentas.TabStop = False
         Me.GrpReporteVentas.Text = "Reporte de Ventas"
         '
-        'DateTimePicker1
+        'Button2
         '
-        Me.DateTimePicker1.Location = New System.Drawing.Point(22, 42)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(200, 20)
-        Me.DateTimePicker1.TabIndex = 0
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(22, 20)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(79, 13)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Fecha de inicio"
+        Me.Button2.Location = New System.Drawing.Point(22, 142)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(200, 23)
+        Me.Button2.TabIndex = 4
+        Me.Button2.Text = "Imprimir Reporte de Ventas"
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'Label3
         '
@@ -388,14 +385,30 @@ Partial Class Vendedores
         Me.DateTimePicker2.Size = New System.Drawing.Size(200, 20)
         Me.DateTimePicker2.TabIndex = 2
         '
-        'Button2
+        'Label2
         '
-        Me.Button2.Location = New System.Drawing.Point(22, 142)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(200, 23)
-        Me.Button2.TabIndex = 4
-        Me.Button2.Text = "Imprimir Reporte"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(22, 20)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(79, 13)
+        Me.Label2.TabIndex = 1
+        Me.Label2.Text = "Fecha de inicio"
+        '
+        'DateTimePicker1
+        '
+        Me.DateTimePicker1.Location = New System.Drawing.Point(22, 42)
+        Me.DateTimePicker1.Name = "DateTimePicker1"
+        Me.DateTimePicker1.Size = New System.Drawing.Size(200, 20)
+        Me.DateTimePicker1.TabIndex = 0
+        '
+        'BtnreportedePedidos
+        '
+        Me.BtnreportedePedidos.Location = New System.Drawing.Point(22, 171)
+        Me.BtnreportedePedidos.Name = "BtnreportedePedidos"
+        Me.BtnreportedePedidos.Size = New System.Drawing.Size(200, 23)
+        Me.BtnreportedePedidos.TabIndex = 5
+        Me.BtnreportedePedidos.Text = "Imprimir Reporte de Pedidos"
+        Me.BtnreportedePedidos.UseVisualStyleBackColor = True
         '
         'Vendedores
         '
@@ -465,4 +478,5 @@ Partial Class Vendedores
     Friend WithEvents DateTimePicker2 As DateTimePicker
     Friend WithEvents Label2 As Label
     Friend WithEvents DateTimePicker1 As DateTimePicker
+    Friend WithEvents BtnreportedePedidos As Button
 End Class
