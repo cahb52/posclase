@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Clientes
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Clientes
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
     'No lo modifique con el editor de código.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim NitLabel As System.Windows.Forms.Label
@@ -32,8 +32,6 @@ Partial Class Clientes
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Clientes))
         Me.ClientesBindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
         Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton()
-        Me.ClientesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.DB = New posclase.DB()
         Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel()
         Me.BindingNavigatorDeleteItem = New System.Windows.Forms.ToolStripButton()
         Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton()
@@ -56,15 +54,23 @@ Partial Class Clientes
         Me.BtnReporteClientes = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.FKFacturasClientesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.FacturasBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.ClientesTableAdapter = New posclase.DBTableAdapters.ClientesTableAdapter()
-        Me.TableAdapterManager = New posclase.DBTableAdapters.TableAdapterManager()
-        Me.FacturasTableAdapter = New posclase.DBTableAdapters.FacturasTableAdapter()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.DateFechaFin = New System.Windows.Forms.DateTimePicker()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.DateFechaInicio = New System.Windows.Forms.DateTimePicker()
         Me.IdfacturaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FechaDataGridViewImageColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TotalDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.VendedorDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ClientesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.DB = New posclase.DB()
+        Me.FacturasBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.ClientesTableAdapter = New posclase.DBTableAdapters.ClientesTableAdapter()
+        Me.TableAdapterManager = New posclase.DBTableAdapters.TableAdapterManager()
+        Me.FacturasTableAdapter = New posclase.DBTableAdapters.FacturasTableAdapter()
         NitLabel = New System.Windows.Forms.Label()
         NombresLabel = New System.Windows.Forms.Label()
         ApellidosLabel = New System.Windows.Forms.Label()
@@ -73,10 +79,11 @@ Partial Class Clientes
         EmailLabel = New System.Windows.Forms.Label()
         CType(Me.ClientesBindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ClientesBindingNavigator.SuspendLayout()
-        CType(Me.ClientesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DB, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.FKFacturasClientesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
+        CType(Me.ClientesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DB, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.FacturasBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -160,16 +167,6 @@ Partial Class Clientes
         Me.BindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = True
         Me.BindingNavigatorAddNewItem.Size = New System.Drawing.Size(23, 22)
         Me.BindingNavigatorAddNewItem.Text = "Agregar nuevo"
-        '
-        'ClientesBindingSource
-        '
-        Me.ClientesBindingSource.DataMember = "Clientes"
-        Me.ClientesBindingSource.DataSource = Me.DB
-        '
-        'DB
-        '
-        Me.DB.DataSetName = "DB"
-        Me.DB.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'BindingNavigatorCountItem
         '
@@ -314,7 +311,7 @@ Partial Class Clientes
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(458, 43)
+        Me.Label1.Location = New System.Drawing.Point(489, 43)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(43, 13)
         Me.Label1.TabIndex = 14
@@ -340,10 +337,10 @@ Partial Class Clientes
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdfacturaDataGridViewTextBoxColumn, Me.FechaDataGridViewImageColumn, Me.TotalDataGridViewTextBoxColumn, Me.ClienteDataGridViewTextBoxColumn, Me.VendedorDataGridViewTextBoxColumn})
         Me.DataGridView1.DataSource = Me.FKFacturasClientesBindingSource
-        Me.DataGridView1.Location = New System.Drawing.Point(12, 213)
+        Me.DataGridView1.Location = New System.Drawing.Point(12, 209)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
-        Me.DataGridView1.Size = New System.Drawing.Size(862, 318)
+        Me.DataGridView1.Size = New System.Drawing.Size(449, 322)
         Me.DataGridView1.TabIndex = 16
         '
         'FKFacturasClientesBindingSource
@@ -351,33 +348,60 @@ Partial Class Clientes
         Me.FKFacturasClientesBindingSource.DataMember = "FK_Facturas_Clientes"
         Me.FKFacturasClientesBindingSource.DataSource = Me.ClientesBindingSource
         '
-        'FacturasBindingSource
+        'Label2
         '
-        Me.FacturasBindingSource.DataMember = "Facturas"
-        Me.FacturasBindingSource.DataSource = Me.DB
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(111, 16)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(79, 13)
+        Me.Label2.TabIndex = 17
+        Me.Label2.Text = "Fecha de inicio"
         '
-        'ClientesTableAdapter
+        'GroupBox1
         '
-        Me.ClientesTableAdapter.ClearBeforeFill = True
+        Me.GroupBox1.Controls.Add(Me.Button1)
+        Me.GroupBox1.Controls.Add(Me.DateFechaFin)
+        Me.GroupBox1.Controls.Add(Me.Label3)
+        Me.GroupBox1.Controls.Add(Me.DateFechaInicio)
+        Me.GroupBox1.Controls.Add(Me.Label2)
+        Me.GroupBox1.Location = New System.Drawing.Point(492, 115)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(289, 185)
+        Me.GroupBox1.TabIndex = 18
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Imprimir Reporte"
         '
-        'TableAdapterManager
+        'Button1
         '
-        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
-        Me.TableAdapterManager.CategoriasTableAdapter = Nothing
-        Me.TableAdapterManager.ClientesTableAdapter = Me.ClientesTableAdapter
-        Me.TableAdapterManager.Detalle_PedidoTableAdapter = Nothing
-        Me.TableAdapterManager.Detalle_VentasTableAdapter = Nothing
-        Me.TableAdapterManager.EmpresaTableAdapter = Nothing
-        Me.TableAdapterManager.FacturasTableAdapter = Nothing
-        Me.TableAdapterManager.PedidosTableAdapter = Nothing
-        Me.TableAdapterManager.ProductosTableAdapter = Nothing
-        Me.TableAdapterManager.ProveedoresTableAdapter = Nothing
-        Me.TableAdapterManager.UpdateOrder = posclase.DBTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
-        Me.TableAdapterManager.VendedoresTableAdapter = Nothing
+        Me.Button1.Location = New System.Drawing.Point(7, 148)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(273, 23)
+        Me.Button1.TabIndex = 21
+        Me.Button1.Text = "Reporte de Facturas"
+        Me.Button1.UseVisualStyleBackColor = True
         '
-        'FacturasTableAdapter
+        'DateFechaFin
         '
-        Me.FacturasTableAdapter.ClearBeforeFill = True
+        Me.DateFechaFin.Location = New System.Drawing.Point(8, 112)
+        Me.DateFechaFin.Name = "DateFechaFin"
+        Me.DateFechaFin.Size = New System.Drawing.Size(273, 20)
+        Me.DateFechaFin.TabIndex = 20
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(112, 88)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(54, 13)
+        Me.Label3.TabIndex = 19
+        Me.Label3.Text = "Fecha Fin"
+        '
+        'DateFechaInicio
+        '
+        Me.DateFechaInicio.Location = New System.Drawing.Point(7, 40)
+        Me.DateFechaInicio.Name = "DateFechaInicio"
+        Me.DateFechaInicio.Size = New System.Drawing.Size(273, 20)
+        Me.DateFechaInicio.TabIndex = 18
         '
         'IdfacturaDataGridViewTextBoxColumn
         '
@@ -415,12 +439,54 @@ Partial Class Clientes
         Me.VendedorDataGridViewTextBoxColumn.HeaderText = "Vendedor"
         Me.VendedorDataGridViewTextBoxColumn.Name = "VendedorDataGridViewTextBoxColumn"
         Me.VendedorDataGridViewTextBoxColumn.ReadOnly = True
+        Me.VendedorDataGridViewTextBoxColumn.Visible = False
+        '
+        'ClientesBindingSource
+        '
+        Me.ClientesBindingSource.DataMember = "Clientes"
+        Me.ClientesBindingSource.DataSource = Me.DB
+        '
+        'DB
+        '
+        Me.DB.DataSetName = "DB"
+        Me.DB.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'FacturasBindingSource
+        '
+        Me.FacturasBindingSource.DataMember = "Facturas"
+        Me.FacturasBindingSource.DataSource = Me.DB
+        '
+        'ClientesTableAdapter
+        '
+        Me.ClientesTableAdapter.ClearBeforeFill = True
+        '
+        'TableAdapterManager
+        '
+        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
+        Me.TableAdapterManager.CategoriasTableAdapter = Nothing
+        Me.TableAdapterManager.ClientesTableAdapter = Me.ClientesTableAdapter
+        Me.TableAdapterManager.Detalle_PedidoTableAdapter = Nothing
+        Me.TableAdapterManager.Detalle_PedidoxidpedidoTableAdapter = Nothing
+        Me.TableAdapterManager.Detalle_VentasTableAdapter = Nothing
+        Me.TableAdapterManager.EmpresaTableAdapter = Nothing
+        Me.TableAdapterManager.EmpresaTop1TableAdapter = Nothing
+        Me.TableAdapterManager.FacturasTableAdapter = Nothing
+        Me.TableAdapterManager.PedidosTableAdapter = Nothing
+        Me.TableAdapterManager.ProductosTableAdapter = Nothing
+        Me.TableAdapterManager.ProveedoresTableAdapter = Nothing
+        Me.TableAdapterManager.UpdateOrder = posclase.DBTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
+        Me.TableAdapterManager.VendedoresTableAdapter = Nothing
+        '
+        'FacturasTableAdapter
+        '
+        Me.FacturasTableAdapter.ClearBeforeFill = True
         '
         'Clientes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(886, 543)
+        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.BtnReporteClientes)
         Me.Controls.Add(Me.Label1)
@@ -443,10 +509,12 @@ Partial Class Clientes
         CType(Me.ClientesBindingNavigator, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ClientesBindingNavigator.ResumeLayout(False)
         Me.ClientesBindingNavigator.PerformLayout()
-        CType(Me.ClientesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DB, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.FKFacturasClientesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        CType(Me.ClientesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DB, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.FacturasBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -488,4 +556,10 @@ Partial Class Clientes
     Friend WithEvents TotalDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents ClienteDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents VendedorDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents Label2 As Label
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents DateFechaFin As DateTimePicker
+    Friend WithEvents Label3 As Label
+    Friend WithEvents DateFechaInicio As DateTimePicker
+    Friend WithEvents Button1 As Button
 End Class

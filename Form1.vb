@@ -47,4 +47,14 @@
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.WindowState = FormWindowState.Maximized
     End Sub
+
+    Private Sub PedidosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PedidosToolStripMenuItem.Click
+        Dim pedidos As New Pedidos
+        pedidos.Show()
+    End Sub
+
+    Private Sub VerFacturasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles VerFacturasToolStripMenuItem.Click
+        Dim facturas As New Facturas
+        facturas.Show()
+    End Sub
 End Class

@@ -30,15 +30,17 @@ Partial Class Form1
         Me.ProductosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CategoriasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProductosToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AcercaDeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FacturaciónYPedidosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FacturarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.VerFacturasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PedidosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AcercaDeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ClientesToolStripMenuItem, Me.VendedoresToolStripMenuItem, Me.EmpresaToolStripMenuItem, Me.ProveedoresToolStripMenuItem, Me.ProductosToolStripMenuItem, Me.FacturaciónYPedidosToolStripMenuItem, Me.AcercaDeToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ClientesToolStripMenuItem, Me.VendedoresToolStripMenuItem, Me.EmpresaToolStripMenuItem, Me.ProveedoresToolStripMenuItem, Me.ProductosToolStripMenuItem, Me.FacturaciónYPedidosToolStripMenuItem, Me.PedidosToolStripMenuItem, Me.AcercaDeToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(7, 2, 0, 2)
@@ -89,15 +91,9 @@ Partial Class Form1
         Me.ProductosToolStripMenuItem1.Size = New System.Drawing.Size(130, 22)
         Me.ProductosToolStripMenuItem1.Text = "Productos"
         '
-        'AcercaDeToolStripMenuItem
-        '
-        Me.AcercaDeToolStripMenuItem.Name = "AcercaDeToolStripMenuItem"
-        Me.AcercaDeToolStripMenuItem.Size = New System.Drawing.Size(72, 20)
-        Me.AcercaDeToolStripMenuItem.Text = "Acerca De"
-        '
         'FacturaciónYPedidosToolStripMenuItem
         '
-        Me.FacturaciónYPedidosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FacturarToolStripMenuItem})
+        Me.FacturaciónYPedidosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FacturarToolStripMenuItem, Me.VerFacturasToolStripMenuItem})
         Me.FacturaciónYPedidosToolStripMenuItem.Name = "FacturaciónYPedidosToolStripMenuItem"
         Me.FacturaciónYPedidosToolStripMenuItem.Size = New System.Drawing.Size(135, 20)
         Me.FacturaciónYPedidosToolStripMenuItem.Text = "Facturación y pedidos"
@@ -105,8 +101,26 @@ Partial Class Form1
         'FacturarToolStripMenuItem
         '
         Me.FacturarToolStripMenuItem.Name = "FacturarToolStripMenuItem"
-        Me.FacturarToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.FacturarToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
         Me.FacturarToolStripMenuItem.Text = "Facturar"
+        '
+        'VerFacturasToolStripMenuItem
+        '
+        Me.VerFacturasToolStripMenuItem.Name = "VerFacturasToolStripMenuItem"
+        Me.VerFacturasToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
+        Me.VerFacturasToolStripMenuItem.Text = "Ver facturas"
+        '
+        'PedidosToolStripMenuItem
+        '
+        Me.PedidosToolStripMenuItem.Name = "PedidosToolStripMenuItem"
+        Me.PedidosToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
+        Me.PedidosToolStripMenuItem.Text = "Pedidos"
+        '
+        'AcercaDeToolStripMenuItem
+        '
+        Me.AcercaDeToolStripMenuItem.Name = "AcercaDeToolStripMenuItem"
+        Me.AcercaDeToolStripMenuItem.Size = New System.Drawing.Size(72, 20)
+        Me.AcercaDeToolStripMenuItem.Text = "Acerca De"
         '
         'Form1
         '
@@ -138,4 +152,6 @@ Partial Class Form1
     Friend WithEvents AcercaDeToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FacturaciónYPedidosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FacturarToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PedidosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents VerFacturasToolStripMenuItem As ToolStripMenuItem
 End Class

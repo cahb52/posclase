@@ -30,10 +30,6 @@ Partial Class Vendedores
         Dim UsuarioLabel As System.Windows.Forms.Label
         Dim PasswordLabel As System.Windows.Forms.Label
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Vendedores))
-        Me.DB = New posclase.DB()
-        Me.VendedoresBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.VendedoresTableAdapter = New posclase.DBTableAdapters.VendedoresTableAdapter()
-        Me.TableAdapterManager = New posclase.DBTableAdapters.TableAdapterManager()
         Me.VendedoresBindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
         Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton()
         Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel()
@@ -57,23 +53,29 @@ Partial Class Vendedores
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TxtBuscar = New System.Windows.Forms.TextBox()
         Me.GrpReporteVentas = New System.Windows.Forms.GroupBox()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.BtnreportedePedidos = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
-        Me.BtnreportedePedidos = New System.Windows.Forms.Button()
+        Me.VendedoresBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.DB = New posclase.DB()
+        Me.VendedoresTableAdapter = New posclase.DBTableAdapters.VendedoresTableAdapter()
+        Me.TableAdapterManager = New posclase.DBTableAdapters.TableAdapterManager()
+        Me.Button4 = New System.Windows.Forms.Button()
         DpiLabel = New System.Windows.Forms.Label()
         NombresLabel = New System.Windows.Forms.Label()
         ApellidosLabel = New System.Windows.Forms.Label()
         DireccionLabel = New System.Windows.Forms.Label()
         UsuarioLabel = New System.Windows.Forms.Label()
         PasswordLabel = New System.Windows.Forms.Label()
-        CType(Me.DB, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.VendedoresBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.VendedoresBindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.VendedoresBindingNavigator.SuspendLayout()
         Me.GrpReporteVentas.SuspendLayout()
+        CType(Me.VendedoresBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DB, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DpiLabel
@@ -129,35 +131,6 @@ Partial Class Vendedores
         PasswordLabel.Size = New System.Drawing.Size(55, 13)
         PasswordLabel.TabIndex = 11
         PasswordLabel.Text = "password:"
-        '
-        'DB
-        '
-        Me.DB.DataSetName = "DB"
-        Me.DB.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'VendedoresBindingSource
-        '
-        Me.VendedoresBindingSource.DataMember = "Vendedores"
-        Me.VendedoresBindingSource.DataSource = Me.DB
-        '
-        'VendedoresTableAdapter
-        '
-        Me.VendedoresTableAdapter.ClearBeforeFill = True
-        '
-        'TableAdapterManager
-        '
-        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
-        Me.TableAdapterManager.CategoriasTableAdapter = Nothing
-        Me.TableAdapterManager.ClientesTableAdapter = Nothing
-        Me.TableAdapterManager.Detalle_PedidoTableAdapter = Nothing
-        Me.TableAdapterManager.Detalle_VentasTableAdapter = Nothing
-        Me.TableAdapterManager.EmpresaTableAdapter = Nothing
-        Me.TableAdapterManager.FacturasTableAdapter = Nothing
-        Me.TableAdapterManager.PedidosTableAdapter = Nothing
-        Me.TableAdapterManager.ProductosTableAdapter = Nothing
-        Me.TableAdapterManager.ProveedoresTableAdapter = Nothing
-        Me.TableAdapterManager.UpdateOrder = posclase.DBTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
-        Me.TableAdapterManager.VendedoresTableAdapter = Me.VendedoresTableAdapter
         '
         'VendedoresBindingNavigator
         '
@@ -347,6 +320,8 @@ Partial Class Vendedores
         '
         'GrpReporteVentas
         '
+        Me.GrpReporteVentas.Controls.Add(Me.Button4)
+        Me.GrpReporteVentas.Controls.Add(Me.Button3)
         Me.GrpReporteVentas.Controls.Add(Me.BtnreportedePedidos)
         Me.GrpReporteVentas.Controls.Add(Me.Button2)
         Me.GrpReporteVentas.Controls.Add(Me.Label3)
@@ -355,14 +330,32 @@ Partial Class Vendedores
         Me.GrpReporteVentas.Controls.Add(Me.DateTimePicker1)
         Me.GrpReporteVentas.Location = New System.Drawing.Point(13, 222)
         Me.GrpReporteVentas.Name = "GrpReporteVentas"
-        Me.GrpReporteVentas.Size = New System.Drawing.Size(238, 222)
+        Me.GrpReporteVentas.Size = New System.Drawing.Size(238, 233)
         Me.GrpReporteVentas.TabIndex = 16
         Me.GrpReporteVentas.TabStop = False
         Me.GrpReporteVentas.Text = "Reporte de Ventas"
         '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(22, 170)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(200, 23)
+        Me.Button3.TabIndex = 6
+        Me.Button3.Text = "Facturas Vendedores"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'BtnreportedePedidos
+        '
+        Me.BtnreportedePedidos.Location = New System.Drawing.Point(22, 141)
+        Me.BtnreportedePedidos.Name = "BtnreportedePedidos"
+        Me.BtnreportedePedidos.Size = New System.Drawing.Size(200, 23)
+        Me.BtnreportedePedidos.TabIndex = 5
+        Me.BtnreportedePedidos.Text = "Imprimir Reporte de Pedidos"
+        Me.BtnreportedePedidos.UseVisualStyleBackColor = True
+        '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(22, 142)
+        Me.Button2.Location = New System.Drawing.Point(22, 112)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(200, 23)
         Me.Button2.TabIndex = 4
@@ -380,7 +373,7 @@ Partial Class Vendedores
         '
         'DateTimePicker2
         '
-        Me.DateTimePicker2.Location = New System.Drawing.Point(22, 95)
+        Me.DateTimePicker2.Location = New System.Drawing.Point(22, 86)
         Me.DateTimePicker2.Name = "DateTimePicker2"
         Me.DateTimePicker2.Size = New System.Drawing.Size(200, 20)
         Me.DateTimePicker2.TabIndex = 2
@@ -401,14 +394,43 @@ Partial Class Vendedores
         Me.DateTimePicker1.Size = New System.Drawing.Size(200, 20)
         Me.DateTimePicker1.TabIndex = 0
         '
-        'BtnreportedePedidos
+        'VendedoresBindingSource
         '
-        Me.BtnreportedePedidos.Location = New System.Drawing.Point(22, 171)
-        Me.BtnreportedePedidos.Name = "BtnreportedePedidos"
-        Me.BtnreportedePedidos.Size = New System.Drawing.Size(200, 23)
-        Me.BtnreportedePedidos.TabIndex = 5
-        Me.BtnreportedePedidos.Text = "Imprimir Reporte de Pedidos"
-        Me.BtnreportedePedidos.UseVisualStyleBackColor = True
+        Me.VendedoresBindingSource.DataMember = "Vendedores"
+        Me.VendedoresBindingSource.DataSource = Me.DB
+        '
+        'DB
+        '
+        Me.DB.DataSetName = "DB"
+        Me.DB.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'VendedoresTableAdapter
+        '
+        Me.VendedoresTableAdapter.ClearBeforeFill = True
+        '
+        'TableAdapterManager
+        '
+        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
+        Me.TableAdapterManager.CategoriasTableAdapter = Nothing
+        Me.TableAdapterManager.ClientesTableAdapter = Nothing
+        Me.TableAdapterManager.Detalle_PedidoTableAdapter = Nothing
+        Me.TableAdapterManager.Detalle_VentasTableAdapter = Nothing
+        Me.TableAdapterManager.EmpresaTableAdapter = Nothing
+        Me.TableAdapterManager.FacturasTableAdapter = Nothing
+        Me.TableAdapterManager.PedidosTableAdapter = Nothing
+        Me.TableAdapterManager.ProductosTableAdapter = Nothing
+        Me.TableAdapterManager.ProveedoresTableAdapter = Nothing
+        Me.TableAdapterManager.UpdateOrder = posclase.DBTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
+        Me.TableAdapterManager.VendedoresTableAdapter = Me.VendedoresTableAdapter
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(22, 199)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(200, 23)
+        Me.Button4.TabIndex = 7
+        Me.Button4.Text = "Pedidos Vendedores"
+        Me.Button4.UseVisualStyleBackColor = True
         '
         'Vendedores
         '
@@ -434,13 +456,13 @@ Partial Class Vendedores
         Me.Controls.Add(Me.VendedoresBindingNavigator)
         Me.Name = "Vendedores"
         Me.Text = "Vendedores"
-        CType(Me.DB, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.VendedoresBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.VendedoresBindingNavigator, System.ComponentModel.ISupportInitialize).EndInit()
         Me.VendedoresBindingNavigator.ResumeLayout(False)
         Me.VendedoresBindingNavigator.PerformLayout()
         Me.GrpReporteVentas.ResumeLayout(False)
         Me.GrpReporteVentas.PerformLayout()
+        CType(Me.VendedoresBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DB, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -479,4 +501,6 @@ Partial Class Vendedores
     Friend WithEvents Label2 As Label
     Friend WithEvents DateTimePicker1 As DateTimePicker
     Friend WithEvents BtnreportedePedidos As Button
+    Friend WithEvents Button3 As Button
+    Friend WithEvents Button4 As Button
 End Class

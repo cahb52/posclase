@@ -55,10 +55,17 @@ Partial Class Productos
         Me.Precio_costoTextBox = New System.Windows.Forms.TextBox()
         Me.Precio_ventaTextBox = New System.Windows.Forms.TextBox()
         Me.CategoriaComboBox = New System.Windows.Forms.ComboBox()
+        Me.CategoriasBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.ProductosTableAdapter = New posclase.DBTableAdapters.ProductosTableAdapter()
         Me.TableAdapterManager = New posclase.DBTableAdapters.TableAdapterManager()
-        Me.CategoriasBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.CategoriasTableAdapter = New posclase.DBTableAdapters.CategoriasTableAdapter()
+        Me.BtnProductosExistencias = New System.Windows.Forms.Button()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.DateFechaFin = New System.Windows.Forms.DateTimePicker()
+        Me.DateFechaInicio = New System.Windows.Forms.DateTimePicker()
+        Me.BtnVentasXProducto = New System.Windows.Forms.Button()
         CodigoLabel = New System.Windows.Forms.Label()
         NombreLabel = New System.Windows.Forms.Label()
         DescripcionLabel = New System.Windows.Forms.Label()
@@ -72,6 +79,7 @@ Partial Class Productos
         CType(Me.ProductosBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DB, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CategoriasBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'CodigoLabel
@@ -160,7 +168,7 @@ Partial Class Productos
         Me.ProductosBindingNavigator.MovePreviousItem = Me.BindingNavigatorMovePreviousItem
         Me.ProductosBindingNavigator.Name = "ProductosBindingNavigator"
         Me.ProductosBindingNavigator.PositionItem = Me.BindingNavigatorPositionItem
-        Me.ProductosBindingNavigator.Size = New System.Drawing.Size(800, 25)
+        Me.ProductosBindingNavigator.Size = New System.Drawing.Size(640, 25)
         Me.ProductosBindingNavigator.TabIndex = 0
         Me.ProductosBindingNavigator.Text = "BindingNavigator1"
         '
@@ -226,6 +234,7 @@ Partial Class Productos
         '
         Me.BindingNavigatorPositionItem.AccessibleName = "Posición"
         Me.BindingNavigatorPositionItem.AutoSize = False
+        Me.BindingNavigatorPositionItem.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.BindingNavigatorPositionItem.Name = "BindingNavigatorPositionItem"
         Me.BindingNavigatorPositionItem.Size = New System.Drawing.Size(50, 23)
         Me.BindingNavigatorPositionItem.Text = "0"
@@ -272,7 +281,7 @@ Partial Class Productos
         Me.CodigoTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.ProductosBindingSource, "codigo", True))
         Me.CodigoTextBox.Location = New System.Drawing.Point(108, 37)
         Me.CodigoTextBox.Name = "CodigoTextBox"
-        Me.CodigoTextBox.Size = New System.Drawing.Size(334, 20)
+        Me.CodigoTextBox.Size = New System.Drawing.Size(228, 20)
         Me.CodigoTextBox.TabIndex = 2
         '
         'NombreTextBox
@@ -280,7 +289,7 @@ Partial Class Productos
         Me.NombreTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.ProductosBindingSource, "nombre", True))
         Me.NombreTextBox.Location = New System.Drawing.Point(108, 63)
         Me.NombreTextBox.Name = "NombreTextBox"
-        Me.NombreTextBox.Size = New System.Drawing.Size(334, 20)
+        Me.NombreTextBox.Size = New System.Drawing.Size(228, 20)
         Me.NombreTextBox.TabIndex = 4
         '
         'DescripcionTextBox
@@ -288,7 +297,7 @@ Partial Class Productos
         Me.DescripcionTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.ProductosBindingSource, "descripcion", True))
         Me.DescripcionTextBox.Location = New System.Drawing.Point(108, 89)
         Me.DescripcionTextBox.Name = "DescripcionTextBox"
-        Me.DescripcionTextBox.Size = New System.Drawing.Size(334, 20)
+        Me.DescripcionTextBox.Size = New System.Drawing.Size(228, 20)
         Me.DescripcionTextBox.TabIndex = 6
         '
         'FotoTextBox
@@ -296,7 +305,7 @@ Partial Class Productos
         Me.FotoTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.ProductosBindingSource, "foto", True))
         Me.FotoTextBox.Location = New System.Drawing.Point(108, 115)
         Me.FotoTextBox.Name = "FotoTextBox"
-        Me.FotoTextBox.Size = New System.Drawing.Size(334, 20)
+        Me.FotoTextBox.Size = New System.Drawing.Size(228, 20)
         Me.FotoTextBox.TabIndex = 8
         '
         'CantidadTextBox
@@ -304,7 +313,7 @@ Partial Class Productos
         Me.CantidadTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.ProductosBindingSource, "cantidad", True))
         Me.CantidadTextBox.Location = New System.Drawing.Point(108, 141)
         Me.CantidadTextBox.Name = "CantidadTextBox"
-        Me.CantidadTextBox.Size = New System.Drawing.Size(334, 20)
+        Me.CantidadTextBox.Size = New System.Drawing.Size(228, 20)
         Me.CantidadTextBox.TabIndex = 10
         '
         'Precio_costoTextBox
@@ -312,7 +321,7 @@ Partial Class Productos
         Me.Precio_costoTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.ProductosBindingSource, "precio_costo", True))
         Me.Precio_costoTextBox.Location = New System.Drawing.Point(108, 167)
         Me.Precio_costoTextBox.Name = "Precio_costoTextBox"
-        Me.Precio_costoTextBox.Size = New System.Drawing.Size(334, 20)
+        Me.Precio_costoTextBox.Size = New System.Drawing.Size(228, 20)
         Me.Precio_costoTextBox.TabIndex = 12
         '
         'Precio_ventaTextBox
@@ -320,7 +329,7 @@ Partial Class Productos
         Me.Precio_ventaTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.ProductosBindingSource, "precio_venta", True))
         Me.Precio_ventaTextBox.Location = New System.Drawing.Point(108, 193)
         Me.Precio_ventaTextBox.Name = "Precio_ventaTextBox"
-        Me.Precio_ventaTextBox.Size = New System.Drawing.Size(334, 20)
+        Me.Precio_ventaTextBox.Size = New System.Drawing.Size(228, 20)
         Me.Precio_ventaTextBox.TabIndex = 14
         '
         'CategoriaComboBox
@@ -331,9 +340,14 @@ Partial Class Productos
         Me.CategoriaComboBox.FormattingEnabled = True
         Me.CategoriaComboBox.Location = New System.Drawing.Point(108, 219)
         Me.CategoriaComboBox.Name = "CategoriaComboBox"
-        Me.CategoriaComboBox.Size = New System.Drawing.Size(334, 21)
+        Me.CategoriaComboBox.Size = New System.Drawing.Size(228, 21)
         Me.CategoriaComboBox.TabIndex = 16
         Me.CategoriaComboBox.ValueMember = "idcategoria"
+        '
+        'CategoriasBindingSource
+        '
+        Me.CategoriasBindingSource.DataMember = "Categorias"
+        Me.CategoriasBindingSource.DataSource = Me.DB
         '
         'ProductosTableAdapter
         '
@@ -344,28 +358,91 @@ Partial Class Productos
         Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
         Me.TableAdapterManager.CategoriasTableAdapter = Nothing
         Me.TableAdapterManager.ClientesTableAdapter = Nothing
+        Me.TableAdapterManager.Detalle_PedidoTableAdapter = Nothing
         Me.TableAdapterManager.Detalle_VentasTableAdapter = Nothing
         Me.TableAdapterManager.EmpresaTableAdapter = Nothing
         Me.TableAdapterManager.FacturasTableAdapter = Nothing
+        Me.TableAdapterManager.PedidosTableAdapter = Nothing
         Me.TableAdapterManager.ProductosTableAdapter = Me.ProductosTableAdapter
         Me.TableAdapterManager.ProveedoresTableAdapter = Nothing
         Me.TableAdapterManager.UpdateOrder = posclase.DBTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
         Me.TableAdapterManager.VendedoresTableAdapter = Nothing
         '
-        'CategoriasBindingSource
-        '
-        Me.CategoriasBindingSource.DataMember = "Categorias"
-        Me.CategoriasBindingSource.DataSource = Me.DB
-        '
         'CategoriasTableAdapter
         '
         Me.CategoriasTableAdapter.ClearBeforeFill = True
+        '
+        'BtnProductosExistencias
+        '
+        Me.BtnProductosExistencias.Location = New System.Drawing.Point(372, 40)
+        Me.BtnProductosExistencias.Name = "BtnProductosExistencias"
+        Me.BtnProductosExistencias.Size = New System.Drawing.Size(253, 39)
+        Me.BtnProductosExistencias.TabIndex = 17
+        Me.BtnProductosExistencias.Text = "Imprimir Productos y Existencias"
+        Me.BtnProductosExistencias.UseVisualStyleBackColor = True
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.Label2)
+        Me.GroupBox1.Controls.Add(Me.Label1)
+        Me.GroupBox1.Controls.Add(Me.DateFechaFin)
+        Me.GroupBox1.Controls.Add(Me.DateFechaInicio)
+        Me.GroupBox1.Controls.Add(Me.BtnVentasXProducto)
+        Me.GroupBox1.Location = New System.Drawing.Point(372, 92)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(253, 169)
+        Me.GroupBox1.TabIndex = 23
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Ventas por Producto"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(17, 73)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(69, 13)
+        Me.Label2.TabIndex = 27
+        Me.Label2.Text = "Fecha de fin:"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(17, 23)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(83, 13)
+        Me.Label1.TabIndex = 26
+        Me.Label1.Text = "Fecha de Inicio:"
+        '
+        'DateFechaFin
+        '
+        Me.DateFechaFin.Location = New System.Drawing.Point(20, 95)
+        Me.DateFechaFin.Name = "DateFechaFin"
+        Me.DateFechaFin.Size = New System.Drawing.Size(212, 20)
+        Me.DateFechaFin.TabIndex = 25
+        '
+        'DateFechaInicio
+        '
+        Me.DateFechaInicio.Location = New System.Drawing.Point(20, 43)
+        Me.DateFechaInicio.Name = "DateFechaInicio"
+        Me.DateFechaInicio.Size = New System.Drawing.Size(212, 20)
+        Me.DateFechaInicio.TabIndex = 24
+        '
+        'BtnVentasXProducto
+        '
+        Me.BtnVentasXProducto.Location = New System.Drawing.Point(17, 125)
+        Me.BtnVentasXProducto.Name = "BtnVentasXProducto"
+        Me.BtnVentasXProducto.Size = New System.Drawing.Size(215, 23)
+        Me.BtnVentasXProducto.TabIndex = 23
+        Me.BtnVentasXProducto.Text = "Imprimir"
+        Me.BtnVentasXProducto.UseVisualStyleBackColor = True
         '
         'Productos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(640, 284)
+        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.BtnProductosExistencias)
         Me.Controls.Add(CodigoLabel)
         Me.Controls.Add(Me.CodigoTextBox)
         Me.Controls.Add(NombreLabel)
@@ -391,6 +468,8 @@ Partial Class Productos
         CType(Me.ProductosBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DB, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CategoriasBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -423,4 +502,11 @@ Partial Class Productos
     Friend WithEvents CategoriaComboBox As ComboBox
     Friend WithEvents CategoriasBindingSource As BindingSource
     Friend WithEvents CategoriasTableAdapter As DBTableAdapters.CategoriasTableAdapter
+    Friend WithEvents BtnProductosExistencias As Button
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents DateFechaFin As DateTimePicker
+    Friend WithEvents DateFechaInicio As DateTimePicker
+    Friend WithEvents BtnVentasXProducto As Button
 End Class

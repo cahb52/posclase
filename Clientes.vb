@@ -41,4 +41,12 @@
         reporteClientes.Show()
 
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim reportecomprascliente As New ReporteComprasCliente
+        reportecomprascliente.nit = NitTextBox.Text
+        reportecomprascliente.fechainicio = DateFechaInicio.Value
+        reportecomprascliente.fechafin = DateFechaFin.Value
+        reportecomprascliente.Show()
+    End Sub
 End Class

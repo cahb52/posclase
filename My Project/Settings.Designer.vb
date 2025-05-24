@@ -64,6 +64,17 @@ Namespace My
                 Return CType(Me("negocioConnectionString"),String)
             End Get
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-AKHHQ05\SQLEXPRESS;Initial Catalog=negocio;User ID=sa;Passwor"& _ 
+            "d=Guatemala#12;Encrypt=False")>  _
+        Public ReadOnly Property DB3() As String
+            Get
+                Return CType(Me("DB3"),String)
+            End Get
+        End Property
     End Class
 End Namespace
 

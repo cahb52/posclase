@@ -48,10 +48,62 @@
             ' Pasa fechainicio y fechafin correctamente al reporte o consulta
             Dim ventasxvendedor As New RptVentasxVendedor
             ventasxvendedor.dpi = DpiTextBox.Text
-            ventasxvendedor.fecha_inico = fechainicio
+            ventasxvendedor.fecha_inicio = fechainicio
             ventasxvendedor.fecha_fin = fechafin
             ventasxvendedor.Show()
         End If
 
+    End Sub
+
+    Private Sub BtnreportedePedidos_Click(sender As Object, e As EventArgs) Handles BtnreportedePedidos.Click
+        If String.IsNullOrEmpty(DpiTextBox.Text) Then
+            MessageBox.Show("No hay DPI a comparar")
+        Else
+            Dim fechainicio As DateTime = DateTimePicker1.Value.Date
+            Dim fechafin As DateTime = DateTimePicker2.Value.Date.AddDays(1).AddSeconds(-1)
+            Debug.WriteLine(fechainicio.ToString("yyyy-MM-dd HH:mm:ss"))
+            Debug.WriteLine(fechafin.ToString("yyyy-MM-dd HH:mm:ss"))
+            ' Pasa fechainicio y fechafin correctamente al reporte o consulta
+            Dim pedidosxvendedor As New RptPedidosxVendedor
+            pedidosxvendedor.dpi = DpiTextBox.Text
+            pedidosxvendedor.fecha_inico = fechainicio
+            pedidosxvendedor.fecha_fin = fechafin
+            pedidosxvendedor.Show()
+        End If
+
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        If String.IsNullOrEmpty(DpiTextBox.Text) Then
+            MessageBox.Show("No hay dpi a comparar")
+        Else
+            Dim fechainicio As DateTime = DateTimePicker1.Value.Date
+            Dim fechafin As DateTime = DateTimePicker2.Value.Date.AddDays(1).AddSeconds(-1)
+            Debug.WriteLine(fechainicio.ToString("yyyy-MM-dd HH:mm:ss"))
+            Debug.WriteLine(fechafin.ToString("yyyy-MM-dd HH:mm:ss"))
+            ' Pasa fechainicio y fechafin correctamente al reporte o consulta
+            Dim ventasxvendedor As New RptVentasxVendedor
+            ventasxvendedor.dpi = ""
+            ventasxvendedor.fecha_inicio = fechainicio
+            ventasxvendedor.fecha_fin = fechafin
+            ventasxvendedor.Show()
+        End If
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        If String.IsNullOrEmpty(DpiTextBox.Text) Then
+            MessageBox.Show("No hay DPI a comparar")
+        Else
+            Dim fechainicio As DateTime = DateTimePicker1.Value.Date
+            Dim fechafin As DateTime = DateTimePicker2.Value.Date.AddDays(1).AddSeconds(-1)
+            Debug.WriteLine(fechainicio.ToString("yyyy-MM-dd HH:mm:ss"))
+            Debug.WriteLine(fechafin.ToString("yyyy-MM-dd HH:mm:ss"))
+            ' Pasa fechainicio y fechafin correctamente al reporte o consulta
+            Dim pedidosxvendedor As New RptPedidosxVendedor
+            pedidosxvendedor.dpi = ""
+            pedidosxvendedor.fecha_inico = fechainicio
+            pedidosxvendedor.fecha_fin = fechafin
+            pedidosxvendedor.Show()
+        End If
     End Sub
 End Class

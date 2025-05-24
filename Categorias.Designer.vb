@@ -48,8 +48,6 @@ Partial Class Categorias
         Me.CategoriaTextBox = New System.Windows.Forms.TextBox()
         Me.DescripcionTextBox = New System.Windows.Forms.TextBox()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.CategoriasProductosBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.ProductosTableAdapter = New posclase.DBTableAdapters.ProductosTableAdapter()
         Me.CodigoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.NombreDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DescripcionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -58,6 +56,9 @@ Partial Class Categorias
         Me.PreciocostoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PrecioventaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CategoriaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CategoriasProductosBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.ProductosTableAdapter = New posclase.DBTableAdapters.ProductosTableAdapter()
+        Me.BtnCategorias = New System.Windows.Forms.Button()
         IdcategoriaLabel = New System.Windows.Forms.Label()
         CategoriaLabel = New System.Windows.Forms.Label()
         DescripcionLabel = New System.Windows.Forms.Label()
@@ -115,9 +116,11 @@ Partial Class Categorias
         Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
         Me.TableAdapterManager.CategoriasTableAdapter = Me.CategoriasTableAdapter
         Me.TableAdapterManager.ClientesTableAdapter = Nothing
+        Me.TableAdapterManager.Detalle_PedidoTableAdapter = Nothing
         Me.TableAdapterManager.Detalle_VentasTableAdapter = Nothing
         Me.TableAdapterManager.EmpresaTableAdapter = Nothing
         Me.TableAdapterManager.FacturasTableAdapter = Nothing
+        Me.TableAdapterManager.PedidosTableAdapter = Nothing
         Me.TableAdapterManager.ProductosTableAdapter = Nothing
         Me.TableAdapterManager.ProveedoresTableAdapter = Nothing
         Me.TableAdapterManager.UpdateOrder = posclase.DBTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
@@ -193,6 +196,7 @@ Partial Class Categorias
         '
         Me.BindingNavigatorPositionItem.AccessibleName = "Posición"
         Me.BindingNavigatorPositionItem.AutoSize = False
+        Me.BindingNavigatorPositionItem.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.BindingNavigatorPositionItem.Name = "BindingNavigatorPositionItem"
         Me.BindingNavigatorPositionItem.Size = New System.Drawing.Size(50, 23)
         Me.BindingNavigatorPositionItem.Text = "0"
@@ -275,15 +279,6 @@ Partial Class Categorias
         Me.DataGridView1.Size = New System.Drawing.Size(793, 339)
         Me.DataGridView1.TabIndex = 7
         '
-        'CategoriasProductosBindingSource
-        '
-        Me.CategoriasProductosBindingSource.DataMember = "Categorias_Productos"
-        Me.CategoriasProductosBindingSource.DataSource = Me.CategoriasBindingSource
-        '
-        'ProductosTableAdapter
-        '
-        Me.ProductosTableAdapter.ClearBeforeFill = True
-        '
         'CodigoDataGridViewTextBoxColumn
         '
         Me.CodigoDataGridViewTextBoxColumn.DataPropertyName = "codigo"
@@ -343,11 +338,30 @@ Partial Class Categorias
         Me.CategoriaDataGridViewTextBoxColumn.ReadOnly = True
         Me.CategoriaDataGridViewTextBoxColumn.Visible = False
         '
+        'CategoriasProductosBindingSource
+        '
+        Me.CategoriasProductosBindingSource.DataMember = "Categorias_Productos"
+        Me.CategoriasProductosBindingSource.DataSource = Me.CategoriasBindingSource
+        '
+        'ProductosTableAdapter
+        '
+        Me.ProductosTableAdapter.ClearBeforeFill = True
+        '
+        'BtnCategorias
+        '
+        Me.BtnCategorias.Location = New System.Drawing.Point(425, 48)
+        Me.BtnCategorias.Name = "BtnCategorias"
+        Me.BtnCategorias.Size = New System.Drawing.Size(300, 23)
+        Me.BtnCategorias.TabIndex = 8
+        Me.BtnCategorias.Text = "IMPRIMIR CATEGORIAS"
+        Me.BtnCategorias.UseVisualStyleBackColor = True
+        '
         'Categorias
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(818, 536)
+        Me.Controls.Add(Me.BtnCategorias)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(IdcategoriaLabel)
         Me.Controls.Add(Me.IdcategoriaTextBox)
@@ -401,4 +415,5 @@ Partial Class Categorias
     Friend WithEvents PreciocostoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents PrecioventaDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents CategoriaDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents BtnCategorias As Button
 End Class

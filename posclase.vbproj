@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props" Condition="Exists('packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{7B22C8D2-3318-4396-BDB4-369E14DE21B8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>posclase.My.MyApplication</StartupObject>
+    <StartupObject>posclase.MainModule</StartupObject>
     <RootNamespace>posclase</RootNamespace>
     <AssemblyName>POSClaseInae</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>WindowsForms</MyType>
+    <MyType>WindowsFormsWithCustomSubMain</MyType>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -69,8 +70,8 @@
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.SqlServer.Types.14.0.1016.290\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    <Reference Include="Microsoft.SqlServer.Types, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.SqlServer.Types.160.1000.6\lib\net462\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -122,9 +123,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DB.xsd</DependentUpon>
     </Compile>
-    <Compile Include="DB.vb">
-      <DependentUpon>DB.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Empresa.Designer.vb">
       <DependentUpon>Empresa.vb</DependentUpon>
     </Compile>
@@ -156,6 +154,13 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Loguin.Designer.vb">
+      <DependentUpon>Loguin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Loguin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainModule.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -172,10 +177,22 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Pedidos.Designer.vb">
+      <DependentUpon>Pedidos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Pedidos.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Productos.Designer.vb">
       <DependentUpon>Productos.vb</DependentUpon>
     </Compile>
     <Compile Include="Productos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductoyExistencia.Designer.vb">
+      <DependentUpon>ProductoyExistencia.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ProductoyExistencia.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Proveedores.Designer.vb">
@@ -184,16 +201,52 @@
     <Compile Include="Proveedores.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ReporteCategorias.Designer.vb">
+      <DependentUpon>ReporteCategorias.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReporteCategorias.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReporteComprasCliente.Designer.vb">
+      <DependentUpon>ReporteComprasCliente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReporteComprasCliente.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ReporteVendedores.Designer.vb">
       <DependentUpon>ReporteVendedores.vb</DependentUpon>
     </Compile>
     <Compile Include="ReporteVendedores.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ReporteVentasxProducto.Designer.vb">
+      <DependentUpon>ReporteVentasxProducto.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReporteVentasxProducto.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="RptClientes.Designer.vb">
       <DependentUpon>RptClientes.vb</DependentUpon>
     </Compile>
     <Compile Include="RptClientes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RptFacturasConNombres.Designer.vb">
+      <DependentUpon>RptFacturasConNombres.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RptFacturasConNombres.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RptPedido.Designer.vb">
+      <DependentUpon>RptPedido.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RptPedido.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RptPedidosporRangodeFechas.Designer.vb">
+      <DependentUpon>RptPedidosporRangodeFechas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RptPedidosporRangodeFechas.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="RptProveedores.Designer.vb">
@@ -208,12 +261,19 @@
     <Compile Include="RptVendedores.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="RptPedidosxVendedor.Designer.vb">
+      <DependentUpon>RptPedidosxVendedor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RptPedidosxVendedor.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="RptVentasxVendedor.Designer.vb">
       <DependentUpon>RptVentasxVendedor.vb</DependentUpon>
     </Compile>
     <Compile Include="RptVentasxVendedor.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Sesion.vb" />
     <Compile Include="Vendedores.Designer.vb">
       <DependentUpon>Vendedores.vb</DependentUpon>
     </Compile>
@@ -248,23 +308,55 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Loguin.resx">
+      <DependentUpon>Loguin.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pedido.rdlc" />
+    <EmbeddedResource Include="Pedidos.resx">
+      <DependentUpon>Pedidos.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Productos.resx">
       <DependentUpon>Productos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Productosyexistencias.rdlc" />
+    <EmbeddedResource Include="ProductoyExistencia.resx">
+      <DependentUpon>ProductoyExistencia.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Proveedores.resx">
       <DependentUpon>Proveedores.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReporteCategorias.resx">
+      <DependentUpon>ReporteCategorias.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReporteComprasCliente.resx">
+      <DependentUpon>ReporteComprasCliente.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReporteVendedores.resx">
       <DependentUpon>ReporteVendedores.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReporteVentasxProducto.resx">
+      <DependentUpon>ReporteVentasxProducto.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RptCategorias.rdlc" />
     <EmbeddedResource Include="RptClientes.resx">
       <DependentUpon>RptClientes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RptFacturasConNombres.rdlc" />
+    <EmbeddedResource Include="RptFacturasConNombres.resx">
+      <DependentUpon>RptFacturasConNombres.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RptPedido.resx">
+      <DependentUpon>RptPedido.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RptPedidosporfecha.rdlc" />
+    <EmbeddedResource Include="RptPedidosporRangodeFechas.resx">
+      <DependentUpon>RptPedidosporRangodeFechas.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RptProveedores.rdlc" />
     <EmbeddedResource Include="RptProveedores.resx">
@@ -273,10 +365,16 @@
     <EmbeddedResource Include="RptVendedores.resx">
       <DependentUpon>RptVendedores.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="RptPedidosxVendedor.rdlc" />
+    <EmbeddedResource Include="RptPedidosxVendedor.resx">
+      <DependentUpon>RptPedidosxVendedor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RptVentasxproducto.rdlc" />
     <EmbeddedResource Include="RptVentasxVendedor.rdlc" />
     <EmbeddedResource Include="RptVentasxVendedor.resx">
       <DependentUpon>RptVentasxVendedor.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TptComprasdeCliente.rdlc" />
     <EmbeddedResource Include="Vendedores.rdlc" />
     <EmbeddedResource Include="Vendedores.resx">
       <DependentUpon>Vendedores.vb</DependentUpon>
@@ -307,21 +405,11 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="SqlServerTypes\Loader.cs" />
-    <Content Include="SqlServerTypes\readme.htm" />
-    <Content Include="SqlServerTypes\x64\msvcr120.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x86\msvcr120.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props'))" />
+  </Target>
 </Project>

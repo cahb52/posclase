@@ -87,16 +87,19 @@ Public Class Facturar
 
     Private Sub BtnGuardar_Click(sender As Object, e As EventArgs) Handles BtnGuardar.Click
         If FacturaPedido = 1 Then
-            GuardarPedidoDesdeXSD(DetalleVenta, TotalFacturaQ, nitodpi, "1311283", DtFechaEntrega.Value.Date)
+            Dim anticipo As Decimal = Convert.ToDecimal(TxtAnticipo.Text)
+            GuardarPedidoDesdeXSD(DetalleVenta, TotalFacturaQ, nitodpi, Sesion.VendedorDpiActual, DtFechaEntrega.Value.Date, anticipo)
         Else
-            GuardarFacturaDesdeXSD(DetalleVenta, TotalFacturaQ, nitodpi, "1311283")
+            Dim pagado As Decimal = Convert.ToDecimal(TxtPagado.Text)
+            Dim tipopago As String = CmbTipoPago.SelectedText
+            GuardarFacturaDesdeXSD(DetalleVenta, TotalFacturaQ, pagado, tipopago, nitodpi, Sesion.VendedorDpiActual)
         End If
 
     End Sub
 
 
 
-    Public Sub GuardarFacturaDesdeXSD(dgvDetalle As DataGridView, total As Decimal, cliente As String, vendedor As String)
+    Public Sub GuardarFacturaDesdeXSD(dgvDetalle As DataGridView, total As Decimal, pagado As Decimal, tipopago As String, cliente As String, vendedor As String)
         Using cn As New SqlConnection(My.Settings.negocioConnectionString) ' Reemplaza con tu cadena o Settings
             cn.Open()
 
@@ -106,8 +109,16 @@ Public Class Facturar
                 ' Parámetros de la factura
                 cmd.Parameters.AddWithValue("@fecha", DateTime.Now)
                 cmd.Parameters.AddWithValue("@total", total)
+                cmd.Parameters.AddWithValue("@pagado", pagado)
+                cmd.Parameters.AddWithValue("@tipopago", tipopago)
                 cmd.Parameters.AddWithValue("@cliente", cliente)
                 cmd.Parameters.AddWithValue("@vendedor", vendedor)
+
+
+                ' Agregar parámetro de salida
+                Dim facturaIdParam As New SqlParameter("@idfactura", SqlDbType.Int)
+                facturaIdParam.Direction = ParameterDirection.Output
+                cmd.Parameters.Add(facturaIdParam)
 
                 ' Crear tabla para los detalles
                 Dim detalleTable As New DataTable()
@@ -140,17 +151,24 @@ Public Class Facturar
 
                 ' Ejecutar
                 cmd.ExecuteNonQuery()
+                ' Obtener resultados
+                Dim facturaId As Integer = Convert.ToInt32(facturaIdParam.Value)
+                Dim factura As New Factura
+                factura.nitodpi = nitodpi
+                factura.factura = facturaId
+                factura.Show()
+                MessageBox.Show("Factura guardada correctamente. No. " & facturaId)
             End Using
         End Using
 
-        MessageBox.Show("Factura guardada correctamente.")
+        ' MessageBox.Show("Factura guardada correctamente.")
         LimpiarTodo()
     End Sub
 
 
     'aqui voy a generar el pedido
 
-    Public Sub GuardarPedidoDesdeXSD(dgvDetalle As DataGridView, total As Decimal, cliente As String, vendedor As String, fechaentrega As Date)
+    Public Sub GuardarPedidoDesdeXSD(dgvDetalle As DataGridView, total As Decimal, cliente As String, vendedor As String, fechaentrega As Date, adelanto As Decimal)
         Using cn As New SqlConnection(My.Settings.negocioConnectionString) ' Reemplaza con tu cadena o Settings
             cn.Open()
 
@@ -160,9 +178,18 @@ Public Class Facturar
                 ' Parámetros de la factura
                 cmd.Parameters.AddWithValue("@fecha", DateTime.Now)
                 cmd.Parameters.AddWithValue("@total", total)
+                cmd.Parameters.AddWithValue("@adelanto", adelanto)
                 cmd.Parameters.AddWithValue("@cliente", cliente)
                 cmd.Parameters.AddWithValue("@vendedor", vendedor)
                 cmd.Parameters.AddWithValue("@fechaentrega", fechaentrega)
+
+
+                ' Agregar parámetro de salida
+                Dim pedidoIdParam As New SqlParameter("@idpedido", SqlDbType.Int)
+                pedidoIdParam.Direction = ParameterDirection.Output
+                cmd.Parameters.Add(pedidoIdParam)
+
+
 
                 ' Crear tabla para los detalles
                 Dim detalleTable As New DataTable()
@@ -195,10 +222,17 @@ Public Class Facturar
 
                 ' Ejecutar
                 cmd.ExecuteNonQuery()
+                ' Obtener resultado
+                Dim pedidoId As Integer = Convert.ToInt32(pedidoIdParam.Value)
+                Dim rptpedido As New RptPedido
+
+                rptpedido.pedido = pedidoId
+                rptpedido.Show()
+                MessageBox.Show("Pedido guardado correctamente. No. " & pedidoId)
             End Using
         End Using
 
-        MessageBox.Show("Pedido guardado correctamente.")
+        ' MessageBox.Show("Pedido guardado correctamente.")
         LimpiarTodo()
     End Sub
 
@@ -206,9 +240,26 @@ Public Class Facturar
         If ChkPedido.Checked Then
             DtFechaEntrega.Enabled = True
             FacturaPedido = 1
+            TxtAnticipo.ReadOnly = False
+            TxtAnticipo.Text = 0
+            CmbTipoPago.SelectedIndex = -1
+            TxtPagado.Text = 0
+            TxtPagado.ReadOnly = True
+            TxtVuelto.Text = 0
+            TxtVuelto.ReadOnly = True
+            CmbTipoPago.Enabled = False
         Else
             DtFechaEntrega.Enabled = False
             FacturaPedido = 0
+            TxtAnticipo.ReadOnly = True
+            TxtAnticipo.Text = 0
+            TxtRestante.Text = TotalFacturaQ.ToString("C2")
+            CmbTipoPago.SelectedIndex = -1
+            TxtPagado.Text = 0
+            TxtPagado.ReadOnly = False
+            TxtVuelto.Text = 0
+            TxtVuelto.ReadOnly = False
+            CmbTipoPago.Enabled = True
         End If
     End Sub
     Private Sub LimpiarTodo()
@@ -228,11 +279,37 @@ Public Class Facturar
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs)
         Dim factura As New Factura
         factura.factura = 1
         factura.nitodpi = nitodpi
         factura.Show()
 
+    End Sub
+
+    Private Sub TxtAnticipo_TextChanged(sender As Object, e As EventArgs) Handles TxtAnticipo.TextChanged
+        Dim anticipo As Decimal = 0
+        If Decimal.TryParse(TxtAnticipo.Text, anticipo) Then
+            Dim total As Decimal = TotalFacturaQ - anticipo
+            TxtRestante.Text = total.ToString("C2")
+        Else
+            TxtRestante.Text = TotalFacturaQ.ToString("C2")
+        End If
+
+    End Sub
+
+    Private Sub TxtPagado_TextChanged(sender As Object, e As EventArgs) Handles TxtPagado.TextChanged
+        Dim vuelto As Decimal = 0
+        Dim anticipoo As Decimal = 0
+
+        If String.IsNullOrEmpty(TxtAnticipo.Text) Then
+            anticipoo = 0
+        Else
+            Decimal.TryParse(TxtAnticipo.Text, anticipoo)
+        End If
+
+
+        vuelto = TotalFacturaQ - anticipoo
+        TxtVuelto.Text = vuelto.ToString("C2")
     End Sub
 End Class

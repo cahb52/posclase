@@ -13,4 +13,10 @@
         Me.CategoriasTableAdapter.Fill(Me.DB.Categorias)
 
     End Sub
+
+    Private Sub BtnCategorias_Click(sender As Object, e As EventArgs) Handles BtnCategorias.Click
+        Dim reportecategorias As New ReporteCategorias
+        reportecategorias.Show()
+
+    End Sub
 End Class

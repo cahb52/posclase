@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Facturar
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,11 +20,11 @@ Partial Class Facturar
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
     'No lo modifique con el editor de código.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.TxtNombres = New System.Windows.Forms.TextBox()
@@ -53,7 +53,16 @@ Partial Class Facturar
         Me.ChkPedido = New System.Windows.Forms.CheckBox()
         Me.DtFechaEntrega = New System.Windows.Forms.DateTimePicker()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.TxtAnticipo = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.TxtRestante = New System.Windows.Forms.TextBox()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.CmbTipoPago = New System.Windows.Forms.ComboBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.TxtPagado = New System.Windows.Forms.TextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.TxtVuelto = New System.Windows.Forms.TextBox()
         CType(Me.DetalleVenta, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -159,7 +168,7 @@ Partial Class Facturar
         Me.DetalleVenta.Location = New System.Drawing.Point(3, 185)
         Me.DetalleVenta.Name = "DetalleVenta"
         Me.DetalleVenta.ReadOnly = True
-        Me.DetalleVenta.Size = New System.Drawing.Size(927, 364)
+        Me.DetalleVenta.Size = New System.Drawing.Size(927, 290)
         Me.DetalleVenta.TabIndex = 11
         '
         'codigo
@@ -182,18 +191,18 @@ Partial Class Facturar
         '
         'precio_unitario
         '
-        DataGridViewCellStyle4.Format = "C2"
-        DataGridViewCellStyle4.NullValue = Nothing
-        Me.precio_unitario.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.Format = "C2"
+        DataGridViewCellStyle1.NullValue = Nothing
+        Me.precio_unitario.DefaultCellStyle = DataGridViewCellStyle1
         Me.precio_unitario.HeaderText = "Precio Unitario"
         Me.precio_unitario.Name = "precio_unitario"
         Me.precio_unitario.ReadOnly = True
         '
         'precio_costo
         '
-        DataGridViewCellStyle5.Format = "C2"
-        DataGridViewCellStyle5.NullValue = Nothing
-        Me.precio_costo.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle2.Format = "C2"
+        DataGridViewCellStyle2.NullValue = Nothing
+        Me.precio_costo.DefaultCellStyle = DataGridViewCellStyle2
         Me.precio_costo.HeaderText = "Precio Costo"
         Me.precio_costo.Name = "precio_costo"
         Me.precio_costo.ReadOnly = True
@@ -201,9 +210,9 @@ Partial Class Facturar
         '
         'subtotal
         '
-        DataGridViewCellStyle6.Format = "C2"
-        DataGridViewCellStyle6.NullValue = Nothing
-        Me.subtotal.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle3.Format = "C2"
+        DataGridViewCellStyle3.NullValue = Nothing
+        Me.subtotal.DefaultCellStyle = DataGridViewCellStyle3
         Me.subtotal.HeaderText = "Subtotal"
         Me.subtotal.Name = "subtotal"
         Me.subtotal.ReadOnly = True
@@ -272,9 +281,9 @@ Partial Class Facturar
         '
         'BtnGuardar
         '
-        Me.BtnGuardar.Location = New System.Drawing.Point(687, 555)
+        Me.BtnGuardar.Location = New System.Drawing.Point(687, 576)
         Me.BtnGuardar.Name = "BtnGuardar"
-        Me.BtnGuardar.Size = New System.Drawing.Size(243, 56)
+        Me.BtnGuardar.Size = New System.Drawing.Size(243, 35)
         Me.BtnGuardar.TabIndex = 20
         Me.BtnGuardar.Text = "Generar"
         Me.BtnGuardar.UseVisualStyleBackColor = True
@@ -282,7 +291,7 @@ Partial Class Facturar
         'ChkPedido
         '
         Me.ChkPedido.AutoSize = True
-        Me.ChkPedido.Location = New System.Drawing.Point(16, 583)
+        Me.ChkPedido.Location = New System.Drawing.Point(3, 483)
         Me.ChkPedido.Name = "ChkPedido"
         Me.ChkPedido.Size = New System.Drawing.Size(59, 17)
         Me.ChkPedido.TabIndex = 21
@@ -292,7 +301,7 @@ Partial Class Facturar
         'DtFechaEntrega
         '
         Me.DtFechaEntrega.Enabled = False
-        Me.DtFechaEntrega.Location = New System.Drawing.Point(222, 581)
+        Me.DtFechaEntrega.Location = New System.Drawing.Point(191, 481)
         Me.DtFechaEntrega.Name = "DtFechaEntrega"
         Me.DtFechaEntrega.Size = New System.Drawing.Size(200, 20)
         Me.DtFechaEntrega.TabIndex = 22
@@ -300,27 +309,117 @@ Partial Class Facturar
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(105, 584)
+        Me.Label9.Location = New System.Drawing.Point(74, 484)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(95, 13)
         Me.Label9.TabIndex = 23
         Me.Label9.Text = "Fecha de Entrega:"
         '
-        'Button1
+        'Label10
         '
-        Me.Button1.Location = New System.Drawing.Point(524, 573)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 24
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(3, 507)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(45, 13)
+        Me.Label10.TabIndex = 24
+        Me.Label10.Text = "Anticipo"
+        '
+        'TxtAnticipo
+        '
+        Me.TxtAnticipo.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.TxtAnticipo.Location = New System.Drawing.Point(55, 507)
+        Me.TxtAnticipo.Name = "TxtAnticipo"
+        Me.TxtAnticipo.ReadOnly = True
+        Me.TxtAnticipo.Size = New System.Drawing.Size(161, 20)
+        Me.TxtAnticipo.TabIndex = 25
+        Me.TxtAnticipo.Text = "0"
+        Me.TxtAnticipo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(3, 535)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(50, 13)
+        Me.Label11.TabIndex = 26
+        Me.Label11.Text = "Restante"
+        '
+        'TxtRestante
+        '
+        Me.TxtRestante.Enabled = False
+        Me.TxtRestante.Location = New System.Drawing.Point(55, 533)
+        Me.TxtRestante.Name = "TxtRestante"
+        Me.TxtRestante.ReadOnly = True
+        Me.TxtRestante.Size = New System.Drawing.Size(161, 20)
+        Me.TxtRestante.TabIndex = 27
+        Me.TxtRestante.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(597, 487)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(70, 13)
+        Me.Label12.TabIndex = 28
+        Me.Label12.Text = "Tipo de pago"
+        '
+        'CmbTipoPago
+        '
+        Me.CmbTipoPago.FormattingEnabled = True
+        Me.CmbTipoPago.Items.AddRange(New Object() {"Efectivo", "Tarjeta", "Otro"})
+        Me.CmbTipoPago.Location = New System.Drawing.Point(687, 484)
+        Me.CmbTipoPago.Name = "CmbTipoPago"
+        Me.CmbTipoPago.Size = New System.Drawing.Size(243, 21)
+        Me.CmbTipoPago.TabIndex = 29
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(597, 517)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(47, 13)
+        Me.Label13.TabIndex = 30
+        Me.Label13.Text = "Pagado:"
+        '
+        'TxtPagado
+        '
+        Me.TxtPagado.Location = New System.Drawing.Point(687, 514)
+        Me.TxtPagado.Name = "TxtPagado"
+        Me.TxtPagado.Size = New System.Drawing.Size(243, 20)
+        Me.TxtPagado.TabIndex = 31
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(597, 543)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(40, 13)
+        Me.Label14.TabIndex = 32
+        Me.Label14.Text = "Vuelto:"
+        '
+        'TxtVuelto
+        '
+        Me.TxtVuelto.Location = New System.Drawing.Point(687, 540)
+        Me.TxtVuelto.Name = "TxtVuelto"
+        Me.TxtVuelto.ReadOnly = True
+        Me.TxtVuelto.Size = New System.Drawing.Size(243, 20)
+        Me.TxtVuelto.TabIndex = 33
         '
         'Facturar
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(942, 613)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.TxtVuelto)
+        Me.Controls.Add(Me.Label14)
+        Me.Controls.Add(Me.TxtPagado)
+        Me.Controls.Add(Me.Label13)
+        Me.Controls.Add(Me.CmbTipoPago)
+        Me.Controls.Add(Me.Label12)
+        Me.Controls.Add(Me.TxtRestante)
+        Me.Controls.Add(Me.Label11)
+        Me.Controls.Add(Me.TxtAnticipo)
+        Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.DtFechaEntrega)
         Me.Controls.Add(Me.ChkPedido)
@@ -379,5 +478,14 @@ Partial Class Facturar
     Friend WithEvents subtotal As DataGridViewTextBoxColumn
     Friend WithEvents DtFechaEntrega As DateTimePicker
     Friend WithEvents Label9 As Label
-    Friend WithEvents Button1 As Button
+    Friend WithEvents Label10 As Label
+    Friend WithEvents TxtAnticipo As TextBox
+    Friend WithEvents Label11 As Label
+    Friend WithEvents TxtRestante As TextBox
+    Friend WithEvents Label12 As Label
+    Friend WithEvents CmbTipoPago As ComboBox
+    Friend WithEvents Label13 As Label
+    Friend WithEvents TxtPagado As TextBox
+    Friend WithEvents Label14 As Label
+    Friend WithEvents TxtVuelto As TextBox
 End Class

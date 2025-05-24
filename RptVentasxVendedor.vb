@@ -2,7 +2,7 @@
 
 Public Class RptVentasxVendedor
     Public dpi As String = ""
-    Public fecha_inico As DateTime
+    Public fecha_inicio As DateTime
     Public fecha_fin As DateTime
     Private Sub ShowNewForm(ByVal sender As Object, ByVal e As EventArgs) Handles NewToolStripMenuItem.Click, NewToolStripButton.Click, NewWindowToolStripMenuItem.Click
         ' Cree una nueva instancia del formulario secundario.
@@ -88,8 +88,26 @@ Public Class RptVentasxVendedor
     Private m_ChildFormNumber As Integer
 
     Private Sub RptVentasxVendedor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Debug.WriteLine("DPI: " & dpi)
+        Debug.WriteLine("Fecha Inicio: " & fecha_inicio.ToString("yyyy-MM-dd HH:mm:ss"))
+        Debug.WriteLine("Fecha Fin: " & fecha_fin.ToString("yyyy-MM-dd HH:mm:ss"))
         'TODO: esta línea de código carga datos en la tabla 'DB.Facturas' Puede moverla o quitarla según sea necesario.
-        Me.FacturasTableAdapter.FillByFacturasxVendedor(Me.DB.Facturas, dpi, fecha_inico, fecha_fin)
+        If dpi = "" Then
+            Me.FacturasTableAdapter.FillByTodosVendedores(Me.DB.Facturas, fecha_inicio, fecha_fin)
+            Dim rowsAffected As Integer
+
+            rowsAffected = Me.FacturasTableAdapter.FillByTodosVendedores(Me.DB.Facturas, fecha_inicio, fecha_fin)
+
+            If rowsAffected > 0 Then
+                Debug.WriteLine(" Sí trajo datos, mostrar reporte")
+            Else
+                Debug.WriteLine(" No trajo datos, mostrar mensaje o manejar caso")
+            End If
+
+        Else
+            Me.FacturasTableAdapter.FillByFacturasxVendedor(Me.DB.Facturas, dpi, fecha_inicio, fecha_fin)
+        End If
+        'Me.FacturasTableAdapter.FillByFacturasxVendedor(Me.DB.Facturas, dpi, fecha_inicio, fecha_fin)
 
         Me.ReportViewer1.RefreshReport()
     End Sub
