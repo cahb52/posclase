@@ -30,9 +30,9 @@ Partial Class Pedidos
         Dim FechaLabel As System.Windows.Forms.Label
         Dim Fecha_entregaLabel As System.Windows.Forms.Label
         Dim EstadoLabel As System.Windows.Forms.Label
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Pedidos))
         Dim AdelantoLabel As System.Windows.Forms.Label
         Dim RestanteLabel As System.Windows.Forms.Label
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Pedidos))
         Me.DB = New posclase.DB()
         Me.PedidosBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.PedidosTableAdapter = New posclase.DBTableAdapters.PedidosTableAdapter()
@@ -55,14 +55,6 @@ Partial Class Pedidos
         Me.FechaDateTimePicker = New System.Windows.Forms.DateTimePicker()
         Me.Fecha_entregaDateTimePicker = New System.Windows.Forms.DateTimePicker()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.IdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CodigoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NombreDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CantidadDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PreciounitarioDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PreciocostoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SubtotalDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PedidoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FKDetallePedidoPedidosBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.EstadoTextBox = New System.Windows.Forms.TextBox()
         Me.BtnFacturar = New System.Windows.Forms.Button()
@@ -77,11 +69,21 @@ Partial Class Pedidos
         Me.AdelantoTextBox = New System.Windows.Forms.TextBox()
         Me.RestanteTextBox = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.DtFechaInicio = New System.Windows.Forms.DateTimePicker()
-        Me.LblFechaInicio = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.DtFechaFin = New System.Windows.Forms.DateTimePicker()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.LblFechaInicio = New System.Windows.Forms.Label()
+        Me.DtFechaInicio = New System.Windows.Forms.DateTimePicker()
+        Me.CmbTipoPago = New System.Windows.Forms.ComboBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.precio_unitario = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.precio_costo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.subtotal = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pedido = New System.Windows.Forms.DataGridViewTextBoxColumn()
         IdpedidoLabel = New System.Windows.Forms.Label()
         TotalLabel = New System.Windows.Forms.Label()
         ClienteLabel = New System.Windows.Forms.Label()
@@ -165,6 +167,24 @@ Partial Class Pedidos
         EstadoLabel.Size = New System.Drawing.Size(42, 13)
         EstadoLabel.TabIndex = 14
         EstadoLabel.Text = "estado:"
+        '
+        'AdelantoLabel
+        '
+        AdelantoLabel.AutoSize = True
+        AdelantoLabel.Location = New System.Drawing.Point(18, 201)
+        AdelantoLabel.Name = "AdelantoLabel"
+        AdelantoLabel.Size = New System.Drawing.Size(51, 13)
+        AdelantoLabel.TabIndex = 19
+        AdelantoLabel.Text = "adelanto:"
+        '
+        'RestanteLabel
+        '
+        RestanteLabel.AutoSize = True
+        RestanteLabel.Location = New System.Drawing.Point(20, 227)
+        RestanteLabel.Name = "RestanteLabel"
+        RestanteLabel.Size = New System.Drawing.Size(48, 13)
+        RestanteLabel.TabIndex = 20
+        RestanteLabel.Text = "restante:"
         '
         'DB
         '
@@ -348,72 +368,13 @@ Partial Class Pedidos
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DataGridView1.AutoGenerateColumns = False
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdDataGridViewTextBoxColumn, Me.CodigoDataGridViewTextBoxColumn, Me.NombreDataGridViewTextBoxColumn, Me.CantidadDataGridViewTextBoxColumn, Me.PreciounitarioDataGridViewTextBoxColumn, Me.PreciocostoDataGridViewTextBoxColumn, Me.SubtotalDataGridViewTextBoxColumn, Me.PedidoDataGridViewTextBoxColumn})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.codigo, Me.nombre, Me.cantidad, Me.precio_unitario, Me.precio_costo, Me.subtotal, Me.pedido})
         Me.DataGridView1.DataSource = Me.FKDetallePedidoPedidosBindingSource
-        Me.DataGridView1.Location = New System.Drawing.Point(13, 294)
+        Me.DataGridView1.Location = New System.Drawing.Point(13, 366)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
-        Me.DataGridView1.Size = New System.Drawing.Size(907, 302)
+        Me.DataGridView1.Size = New System.Drawing.Size(907, 230)
         Me.DataGridView1.TabIndex = 13
-        '
-        'IdDataGridViewTextBoxColumn
-        '
-        Me.IdDataGridViewTextBoxColumn.DataPropertyName = "id"
-        Me.IdDataGridViewTextBoxColumn.HeaderText = "ID"
-        Me.IdDataGridViewTextBoxColumn.Name = "IdDataGridViewTextBoxColumn"
-        Me.IdDataGridViewTextBoxColumn.ReadOnly = True
-        Me.IdDataGridViewTextBoxColumn.Visible = False
-        '
-        'CodigoDataGridViewTextBoxColumn
-        '
-        Me.CodigoDataGridViewTextBoxColumn.DataPropertyName = "codigo"
-        Me.CodigoDataGridViewTextBoxColumn.HeaderText = "CÓDIGO"
-        Me.CodigoDataGridViewTextBoxColumn.Name = "CodigoDataGridViewTextBoxColumn"
-        Me.CodigoDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'NombreDataGridViewTextBoxColumn
-        '
-        Me.NombreDataGridViewTextBoxColumn.DataPropertyName = "nombre"
-        Me.NombreDataGridViewTextBoxColumn.HeaderText = "NOMBRE"
-        Me.NombreDataGridViewTextBoxColumn.Name = "NombreDataGridViewTextBoxColumn"
-        Me.NombreDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'CantidadDataGridViewTextBoxColumn
-        '
-        Me.CantidadDataGridViewTextBoxColumn.DataPropertyName = "cantidad"
-        Me.CantidadDataGridViewTextBoxColumn.HeaderText = "CANTIDAD"
-        Me.CantidadDataGridViewTextBoxColumn.Name = "CantidadDataGridViewTextBoxColumn"
-        Me.CantidadDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'PreciounitarioDataGridViewTextBoxColumn
-        '
-        Me.PreciounitarioDataGridViewTextBoxColumn.DataPropertyName = "precio_unitario"
-        Me.PreciounitarioDataGridViewTextBoxColumn.HeaderText = "PRECIO UNITARIO"
-        Me.PreciounitarioDataGridViewTextBoxColumn.Name = "PreciounitarioDataGridViewTextBoxColumn"
-        Me.PreciounitarioDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'PreciocostoDataGridViewTextBoxColumn
-        '
-        Me.PreciocostoDataGridViewTextBoxColumn.DataPropertyName = "precio_costo"
-        Me.PreciocostoDataGridViewTextBoxColumn.HeaderText = "COSTO"
-        Me.PreciocostoDataGridViewTextBoxColumn.Name = "PreciocostoDataGridViewTextBoxColumn"
-        Me.PreciocostoDataGridViewTextBoxColumn.ReadOnly = True
-        Me.PreciocostoDataGridViewTextBoxColumn.Visible = False
-        '
-        'SubtotalDataGridViewTextBoxColumn
-        '
-        Me.SubtotalDataGridViewTextBoxColumn.DataPropertyName = "subtotal"
-        Me.SubtotalDataGridViewTextBoxColumn.HeaderText = "SUBTOTAL"
-        Me.SubtotalDataGridViewTextBoxColumn.Name = "SubtotalDataGridViewTextBoxColumn"
-        Me.SubtotalDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'PedidoDataGridViewTextBoxColumn
-        '
-        Me.PedidoDataGridViewTextBoxColumn.DataPropertyName = "pedido"
-        Me.PedidoDataGridViewTextBoxColumn.HeaderText = "PEDIDO"
-        Me.PedidoDataGridViewTextBoxColumn.Name = "PedidoDataGridViewTextBoxColumn"
-        Me.PedidoDataGridViewTextBoxColumn.ReadOnly = True
-        Me.PedidoDataGridViewTextBoxColumn.Visible = False
         '
         'FKDetallePedidoPedidosBindingSource
         '
@@ -431,9 +392,9 @@ Partial Class Pedidos
         '
         'BtnFacturar
         '
-        Me.BtnFacturar.Location = New System.Drawing.Point(159, 250)
+        Me.BtnFacturar.Location = New System.Drawing.Point(23, 310)
         Me.BtnFacturar.Name = "BtnFacturar"
-        Me.BtnFacturar.Size = New System.Drawing.Size(152, 23)
+        Me.BtnFacturar.Size = New System.Drawing.Size(288, 50)
         Me.BtnFacturar.TabIndex = 16
         Me.BtnFacturar.Text = "Facturar"
         Me.BtnFacturar.UseVisualStyleBackColor = True
@@ -494,15 +455,6 @@ Partial Class Pedidos
         Me.BtnImprimir.Text = "Imprimir Este Pedido"
         Me.BtnImprimir.UseVisualStyleBackColor = True
         '
-        'AdelantoLabel
-        '
-        AdelantoLabel.AutoSize = True
-        AdelantoLabel.Location = New System.Drawing.Point(18, 201)
-        AdelantoLabel.Name = "AdelantoLabel"
-        AdelantoLabel.Size = New System.Drawing.Size(51, 13)
-        AdelantoLabel.TabIndex = 19
-        AdelantoLabel.Text = "adelanto:"
-        '
         'AdelantoTextBox
         '
         Me.AdelantoTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PedidosBindingSource, "adelanto", True))
@@ -511,15 +463,7 @@ Partial Class Pedidos
         Me.AdelantoTextBox.ReadOnly = True
         Me.AdelantoTextBox.Size = New System.Drawing.Size(211, 20)
         Me.AdelantoTextBox.TabIndex = 20
-        '
-        'RestanteLabel
-        '
-        RestanteLabel.AutoSize = True
-        RestanteLabel.Location = New System.Drawing.Point(20, 227)
-        RestanteLabel.Name = "RestanteLabel"
-        RestanteLabel.Size = New System.Drawing.Size(48, 13)
-        RestanteLabel.TabIndex = 20
-        RestanteLabel.Text = "restante:"
+        Me.AdelantoTextBox.Text = "0"
         '
         'RestanteTextBox
         '
@@ -529,6 +473,7 @@ Partial Class Pedidos
         Me.RestanteTextBox.ReadOnly = True
         Me.RestanteTextBox.Size = New System.Drawing.Size(211, 20)
         Me.RestanteTextBox.TabIndex = 21
+        Me.RestanteTextBox.Text = "0"
         '
         'GroupBox1
         '
@@ -537,28 +482,21 @@ Partial Class Pedidos
         Me.GroupBox1.Controls.Add(Me.DtFechaFin)
         Me.GroupBox1.Controls.Add(Me.LblFechaInicio)
         Me.GroupBox1.Controls.Add(Me.DtFechaInicio)
-        Me.GroupBox1.Location = New System.Drawing.Point(359, 69)
+        Me.GroupBox1.Location = New System.Drawing.Point(533, 40)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(222, 194)
+        Me.GroupBox1.Size = New System.Drawing.Size(266, 223)
         Me.GroupBox1.TabIndex = 22
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Reporte por fecha"
         '
-        'DtFechaInicio
+        'Button1
         '
-        Me.DtFechaInicio.Location = New System.Drawing.Point(10, 46)
-        Me.DtFechaInicio.Name = "DtFechaInicio"
-        Me.DtFechaInicio.Size = New System.Drawing.Size(200, 20)
-        Me.DtFechaInicio.TabIndex = 0
-        '
-        'LblFechaInicio
-        '
-        Me.LblFechaInicio.AutoSize = True
-        Me.LblFechaInicio.Location = New System.Drawing.Point(7, 20)
-        Me.LblFechaInicio.Name = "LblFechaInicio"
-        Me.LblFechaInicio.Size = New System.Drawing.Size(65, 13)
-        Me.LblFechaInicio.TabIndex = 1
-        Me.LblFechaInicio.Text = "Fecha Inicio"
+        Me.Button1.Location = New System.Drawing.Point(10, 132)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(200, 23)
+        Me.Button1.TabIndex = 4
+        Me.Button1.Text = "Imprimir"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'Label1
         '
@@ -576,20 +514,105 @@ Partial Class Pedidos
         Me.DtFechaFin.Size = New System.Drawing.Size(200, 20)
         Me.DtFechaFin.TabIndex = 2
         '
-        'Button1
+        'LblFechaInicio
         '
-        Me.Button1.Location = New System.Drawing.Point(10, 132)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(200, 23)
-        Me.Button1.TabIndex = 4
-        Me.Button1.Text = "Imprimir"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.LblFechaInicio.AutoSize = True
+        Me.LblFechaInicio.Location = New System.Drawing.Point(7, 20)
+        Me.LblFechaInicio.Name = "LblFechaInicio"
+        Me.LblFechaInicio.Size = New System.Drawing.Size(65, 13)
+        Me.LblFechaInicio.TabIndex = 1
+        Me.LblFechaInicio.Text = "Fecha Inicio"
+        '
+        'DtFechaInicio
+        '
+        Me.DtFechaInicio.Location = New System.Drawing.Point(10, 46)
+        Me.DtFechaInicio.Name = "DtFechaInicio"
+        Me.DtFechaInicio.Size = New System.Drawing.Size(200, 20)
+        Me.DtFechaInicio.TabIndex = 0
+        '
+        'CmbTipoPago
+        '
+        Me.CmbTipoPago.FormattingEnabled = True
+        Me.CmbTipoPago.Items.AddRange(New Object() {"Efectivo", "Tarjeta", "Otro"})
+        Me.CmbTipoPago.Location = New System.Drawing.Point(101, 280)
+        Me.CmbTipoPago.Name = "CmbTipoPago"
+        Me.CmbTipoPago.Size = New System.Drawing.Size(211, 21)
+        Me.CmbTipoPago.TabIndex = 23
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(21, 283)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(74, 13)
+        Me.Label2.TabIndex = 24
+        Me.Label2.Text = "Tipo de Pago:"
+        '
+        'id
+        '
+        Me.id.DataPropertyName = "id"
+        Me.id.HeaderText = "ID"
+        Me.id.Name = "id"
+        Me.id.ReadOnly = True
+        Me.id.Visible = False
+        '
+        'codigo
+        '
+        Me.codigo.DataPropertyName = "codigo"
+        Me.codigo.HeaderText = "CÓDIGO"
+        Me.codigo.Name = "codigo"
+        Me.codigo.ReadOnly = True
+        '
+        'nombre
+        '
+        Me.nombre.DataPropertyName = "nombre"
+        Me.nombre.HeaderText = "NOMBRE"
+        Me.nombre.Name = "nombre"
+        Me.nombre.ReadOnly = True
+        '
+        'cantidad
+        '
+        Me.cantidad.DataPropertyName = "cantidad"
+        Me.cantidad.HeaderText = "CANTIDAD"
+        Me.cantidad.Name = "cantidad"
+        Me.cantidad.ReadOnly = True
+        '
+        'precio_unitario
+        '
+        Me.precio_unitario.DataPropertyName = "precio_unitario"
+        Me.precio_unitario.HeaderText = "PRECIO UNITARIO"
+        Me.precio_unitario.Name = "precio_unitario"
+        Me.precio_unitario.ReadOnly = True
+        '
+        'precio_costo
+        '
+        Me.precio_costo.DataPropertyName = "precio_costo"
+        Me.precio_costo.HeaderText = "PRECIO COSTO"
+        Me.precio_costo.Name = "precio_costo"
+        Me.precio_costo.ReadOnly = True
+        '
+        'subtotal
+        '
+        Me.subtotal.DataPropertyName = "subtotal"
+        Me.subtotal.HeaderText = "SUBTOTAL"
+        Me.subtotal.Name = "subtotal"
+        Me.subtotal.ReadOnly = True
+        '
+        'pedido
+        '
+        Me.pedido.DataPropertyName = "pedido"
+        Me.pedido.HeaderText = "PEDIDO"
+        Me.pedido.Name = "pedido"
+        Me.pedido.ReadOnly = True
+        Me.pedido.Visible = False
         '
         'Pedidos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(932, 608)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.CmbTipoPago)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(RestanteLabel)
         Me.Controls.Add(Me.RestanteTextBox)
@@ -654,14 +677,6 @@ Partial Class Pedidos
     Friend WithEvents Fecha_entregaDateTimePicker As DateTimePicker
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents FKDetallePedidoPedidosBindingSource As BindingSource
-    Friend WithEvents IdDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents CodigoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents NombreDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents CantidadDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents PreciounitarioDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents PreciocostoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents SubtotalDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents PedidoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents PedidosBindingNavigatorSaveItem As ToolStripButton
     Friend WithEvents EstadoTextBox As TextBox
     Friend WithEvents BtnFacturar As Button
@@ -681,4 +696,14 @@ Partial Class Pedidos
     Friend WithEvents DtFechaFin As DateTimePicker
     Friend WithEvents LblFechaInicio As Label
     Friend WithEvents DtFechaInicio As DateTimePicker
+    Friend WithEvents CmbTipoPago As ComboBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents id As DataGridViewTextBoxColumn
+    Friend WithEvents codigo As DataGridViewTextBoxColumn
+    Friend WithEvents nombre As DataGridViewTextBoxColumn
+    Friend WithEvents cantidad As DataGridViewTextBoxColumn
+    Friend WithEvents precio_unitario As DataGridViewTextBoxColumn
+    Friend WithEvents precio_costo As DataGridViewTextBoxColumn
+    Friend WithEvents subtotal As DataGridViewTextBoxColumn
+    Friend WithEvents pedido As DataGridViewTextBoxColumn
 End Class

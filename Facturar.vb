@@ -47,6 +47,20 @@ Public Class Facturar
                     Dim fila As DataRow = productoObtenido.Rows(0)
                     Dim precioUnitario As Decimal
                     Dim precioCosto As Decimal = Convert.ToDecimal(fila("precio_costo").ToString())
+
+
+                    ' Verificar si la cantiad de producto es válida o no supera la cantidad en inventario
+                    If Not Decimal.TryParse(TxtCantidad.Text, precioUnitario) OrElse Convert.ToDecimal(TxtCantidad.Text) <= 0 Then
+                        MessageBox.Show("Ingrese una cantidad válida mayor a 0")
+                        Exit Sub
+                    End If
+                    If Convert.ToDecimal(TxtCantidad.Text) > Convert.ToDecimal(fila("cantidad")) Then
+                        MessageBox.Show("No hay suficiente cantidad en inventario")
+                        Exit Sub
+                    End If
+
+                    ' Verificar si el precio de venta es mayor que el precio de costo
+
                     If ChkPorcentaje.Checked Then
                         precioUnitario = Convert.ToDecimal(fila("precio_venta")) - (Convert.ToDecimal(fila("precio_venta")) * (Convert.ToDecimal(TxtDescuento.Text) / 100))
                     Else
@@ -61,13 +75,47 @@ Public Class Facturar
                     Dim subTotal As Decimal = Convert.ToDecimal(TxtCantidad.Text) * precioUnitario
                     TotalFacturaQ += subTotal
                     TxtTotalFactura.Text = TotalFacturaQ.ToString("C2")
-                    DetalleVenta.Rows.Add(
-                        fila("codigo").ToString(),
-                        fila("nombre").ToString(),
-                        TxtCantidad.Text,
-                        precioUnitario,
-                        precioCosto,
-                        subTotal)
+                    ' Verificar si el producto ya existe en el DataGridView y si existe actualizar la cantidad, nombre, precio unitario, precio costo  y subtotal, si no agregar el producto a la fila
+
+                    Dim productoExistente As Boolean = False
+                    For Each row As DataGridViewRow In DetalleVenta.Rows
+                        If row.Cells("codigo").Value.ToString() = fila("codigo").ToString() Then
+                            ' Actualizar la cantidad y el subtotal
+                            Dim cantidadActual As Decimal = Convert.ToDecimal(row.Cells("cantidad").Value) + Convert.ToDecimal(TxtCantidad.Text)
+                            row.Cells("cantidad").Value = cantidadActual
+                            row.Cells("precio_unitario").Value = precioUnitario
+                            row.Cells("precio_costo").Value = precioCosto
+                            row.Cells("subtotal").Value = cantidadActual * precioUnitario
+                            productoExistente = True
+                            ' Actualizar el total de la factura
+                            TotalFacturaQ -= Convert.ToDecimal(row.Cells("subtotal").Value)
+                            TotalFacturaQ += cantidadActual * precioUnitario
+                            TxtTotalFactura.Text = TotalFacturaQ.ToString("C2")
+                            Exit For
+                        End If
+
+                    Next
+                    ' Si no existe el producto, agregarlo a la fila
+                    If Not productoExistente Then
+                        ' Agregar una nueva fila al DataGridView
+                        Dim filaNueva As DataGridViewRow = New DataGridViewRow()
+                        filaNueva.CreateCells(DetalleVenta)
+                        filaNueva.Cells(0).Value = fila("codigo").ToString()
+                        filaNueva.Cells(1).Value = fila("nombre").ToString()
+                        filaNueva.Cells(2).Value = TxtCantidad.Text
+                        filaNueva.Cells(3).Value = precioUnitario
+                        filaNueva.Cells(4).Value = precioCosto
+                        filaNueva.Cells(5).Value = subTotal
+                        DetalleVenta.Rows.Add(filaNueva)
+                    End If
+
+                    'DetalleVenta.Rows.Add(
+                    'fila("codigo").ToString(),
+                    'fila("nombre").ToString(),
+                    'TxtCantidad.Text,
+                    'precioUnitario,
+                    'precioCosto,
+                    'subTotal)
                 End If
             End If
         End If
@@ -302,10 +350,10 @@ Public Class Facturar
         Dim vuelto As Decimal = 0
         Dim anticipoo As Decimal = 0
 
-        If String.IsNullOrEmpty(TxtAnticipo.Text) Then
+        If String.IsNullOrEmpty(TxtPagado.Text) Then
             anticipoo = 0
         Else
-            Decimal.TryParse(TxtAnticipo.Text, anticipoo)
+            Decimal.TryParse(TxtPagado.Text, anticipoo)
         End If
 
 
